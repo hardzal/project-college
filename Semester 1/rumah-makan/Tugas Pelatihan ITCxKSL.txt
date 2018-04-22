@@ -1,0 +1,126 @@
+Website Rumah Makan
+>Index
+>Login
+>Register
+>Pesanan
+>Control Admin
+ >Daftar Pesanan 
+ >Katalog (Create, Reading, Update, Delete)
+ >List Member
+ >Update Kontak
+------------------------
+Fitur Tambahan
+>Tambah Pesanan Checkout (Cart)
+>Update Data Member
+>Page Numbering
+>Category
+>Searching
+>Sorting
+>Validation
+-------------------------
+Tugas Pelatihan:
+login > register
+menu makanan
+CRUD 
+ MAKANAN MINUMAN 
+ Kue Makanan
+ Katalog
+
+Level Session Admin | User
+
+Data Pemesanan
+ID MENU
+Makanan
+Harga
+Jumlah Order
+Tambahan
+Nama Pemesan
+Alamat
+
+Data Member 
+Kontak
+--------------------------------------
+Rumah Makan
+
+index.php
+index.php?op=login
+index.php?op=reg
+index.php?op=logout
+
+katalog.php?menu=makanan
+katalog.php?menu=minuman
+katalog.php?menu=kue-dan-cemilan
+katalog.php?menu=all
+
+pesan.php
+pesan.php?menu=makanan&id=1
+
+control.php
+control.php?op=logout
+
+control-pesan.php
+control-pesan.php?id=1 // tandai sudah dikirim
+
+control-member.php
+control-member.php?id=1&op=del
+
+control-katalog.php
+control-katalog.php?op=edit&id=1
+control-katalog.php?op=del&id=1
+control-katalog.php?op=add
+
+control-kontak.php
+control-kontak.php?op=edit
+---
+member.php
+---------------------------
+data_member
+ id_member
+ username
+ password
+ nama_lengkap
+ ttl
+ domisili
+ alamat
+ kode_pos
+ hp
+ email
+ 
+data_pesanan
+ id_pesanan
+ nama_menu
+ harga_menu
+ order
+ tambahan
+ id_pemesan
+ nama_pemesan
+ alamat
+
+katalog
+ id_katalog
+ nama
+ detail
+ harga
+ menu
+ gambar
+
+menu
+ id_menu
+ nama_menu
+ keterangan
+
+kontak
+ id
+ alamat
+ instagram
+ fb
+ twitter
+ email 
+ telp 
+
+data_admin
+ id
+ username
+ password
+ nama_lengkap
+ bio
