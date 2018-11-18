@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author izal
  */
-public class RegisterView {
+public class RegisterView extends DefaultView {
     JFrame signUpFrame;
     JPanel appPanel;
     JLabel appLabel;
@@ -36,6 +36,10 @@ public class RegisterView {
     JButton submitButton;
     JButton resetButton;
     JButton homeButton;
+    
+    String error[] = {
+        "ERROR"
+    };
     
     public RegisterView() {
         initComponents();
@@ -164,4 +168,7 @@ public class RegisterView {
         return signUpFrame;
     }
     
+    public String errorMessage() {
+       return error[0];
+    }
 }

@@ -18,7 +18,7 @@ import javax.swing.JButton;
  *
  * @author izal
  */
-public class DashboardView {
+public class DashboardView extends DefaultView {
     JFrame dashboardFrame;
     JPanel headerPanel;
     JPanel bodyPanel;

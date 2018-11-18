@@ -9,7 +9,7 @@ package selfmanagement.view;
  *
  * @author izal
  */
-public class TodolistView {
+public class TodolistView extends DefaultView {
  
     public TodolistView() {
         initComponents();

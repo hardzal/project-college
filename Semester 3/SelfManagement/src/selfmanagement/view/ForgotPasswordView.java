@@ -9,7 +9,7 @@ package selfmanagement.view;
  *
  * @author izal
  */
-public class ForgotPasswordView {
+public class ForgotPasswordView extends DefaultView {
     
     public ForgotPasswordView() {
         initComponents();

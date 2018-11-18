@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author izal
  */
-public class HomeView {
+public class HomeView extends DefaultView {
     JFrame homeFrame;
     JPanel messagePanel;
     JLabel appLabel;

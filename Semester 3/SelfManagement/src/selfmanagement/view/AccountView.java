@@ -9,7 +9,7 @@ package selfmanagement.view;
  *
  * @author izal
  */
-public class AccountView {
+public class AccountView extends DefaultView {
     
     public AccountView() {
         initComponents();

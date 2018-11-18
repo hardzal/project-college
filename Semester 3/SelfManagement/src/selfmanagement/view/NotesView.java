@@ -9,8 +9,7 @@ package selfmanagement.view;
  *
  * @author izal
  */
-public class NotesView {
-    
+public class NotesView extends DefaultView {
     public NotesView() {
         initComponents();
     }
