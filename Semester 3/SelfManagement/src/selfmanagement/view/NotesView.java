@@ -10,11 +10,18 @@ package selfmanagement.view;
  * @author izal
  */
 public class NotesView extends DefaultView {
+    
     public NotesView() {
+        template(new String[]{"Notes"});
         initComponents();
+        initFrame();
     }
     
     public void initComponents() {
         
+    }
+    
+    public static void main(String[] args) {
+        new NotesView();
     }
 }

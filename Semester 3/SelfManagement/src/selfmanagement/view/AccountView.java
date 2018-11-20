@@ -12,10 +12,16 @@ package selfmanagement.view;
 public class AccountView extends DefaultView {
     
     public AccountView() {
+        template(new String[]{"Account Settings"});
         initComponents();
+        initFrame();
     }
     
     public void initComponents() {
         
+    }
+    
+    public static void main(String[] args) {
+        new AccountView();
     }
 }

@@ -59,7 +59,7 @@ public class RegisterController {
             registerView.getPassword().setText("");
             registerView.getUsername().setText("");
         } catch(Exception er) {
-            JOptionPane.showMessageDialog(null, "ERROR", "Error reset field "+ er, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error reset field "+ er, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -70,7 +70,7 @@ public class RegisterController {
             LoginController loginController = new LoginController(homeView, account);
             loginController.initLogin();
         } catch(Exception er) {
-            JOptionPane.showMessageDialog(null, "ERROR", "Gagal Kembali", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Gagal Kembali", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

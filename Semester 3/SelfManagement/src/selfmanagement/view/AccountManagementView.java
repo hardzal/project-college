@@ -12,7 +12,9 @@ package selfmanagement.view;
 public class AccountManagementView extends DefaultView {
     
     public AccountManagementView() {
+        template(new String[]{"Account Management"});
         initComponents();
+        initFrame();
     }
     
     public void initComponents() {

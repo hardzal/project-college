@@ -26,6 +26,7 @@ public class DashboardController {
     
     public void initDashboard() {
         dashboardView.getLogoutButton().addActionListener((ae) -> logout());
+        
     }
     
     public void todo() {
