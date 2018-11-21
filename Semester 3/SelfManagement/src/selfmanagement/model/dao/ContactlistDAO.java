@@ -7,8 +7,8 @@ package selfmanagement.model.dao;
 
 /**
  *
- * @author izal
+ * @author user
  */
-public interface ForgotPasswordDAO {
+public interface ContactlistDAO {
     
 }

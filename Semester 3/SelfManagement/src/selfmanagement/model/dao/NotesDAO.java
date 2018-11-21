@@ -5,10 +5,19 @@
  */
 package selfmanagement.model.dao;
 
+import java.util.List;
+import selfmanagement.model.Notes;
+
 /**
  *
  * @author izal
  */
 public interface NotesDAO {
+    
+    public boolean insertNotes();
+    public boolean updateNotes();
+    public boolean deleteNotes();
+    public List<Notes> getAllNotes();
+    public List<Notes> getNotes();
     
 }

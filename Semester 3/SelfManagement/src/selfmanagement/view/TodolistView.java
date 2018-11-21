@@ -18,8 +18,6 @@ import javax.swing.table.DefaultTableModel;
  * @author izal
  */
 public class TodolistView extends DefaultView {
-
-    JLabel TodoLabel;
     JPanel TodoPanel;
     JTable TodoTable;
     DefaultTableModel TodoModel;
@@ -28,9 +26,7 @@ public class TodolistView extends DefaultView {
     JButton editButton;
     JButton deleteButton;
     JButton viewButton;
-    
-    Object data[][];
-    Object columnTable[] = {"Check", "Title", "Start Date", "End Date", "Priority"};
+    Object columnTable[] = {"Check", "Title", "End Date"};
     
     public TodolistView() {
         template(new String[]{"Todolists"});
@@ -40,19 +36,31 @@ public class TodolistView extends DefaultView {
     
     public void initComponents() {
         TodoPanel = new JPanel();
-        TodoLabel = new JLabel("Todo Hari ini : ");
         TodoModel = new DefaultTableModel(columnTable, 0);
         TodoTable = new JTable(TodoModel);
         TodoScroll = new JScrollPane(TodoTable);
-        
-        TodoPanel.setBounds(30, 30, 350, 550);
+        addButton = new JButton("Add Todolist");
+        editButton = new JButton("Edit Todolist");
+        deleteButton = new JButton("Delete Todolist");
+        viewButton = new JButton("View Todolist");
+       
+        TodoPanel.setBounds(30, 30, 530, 650);
         TodoPanel.setLayout(null);
-
-        TodoPanel.add(TodoLabel);
-        TodoLabel.setBounds(10, 10, 100, 50);
-
+        
+        TodoPanel.add(addButton);
+        addButton.setBounds(10, 30, 120, 30);
+        
+        TodoPanel.add(viewButton);
+        viewButton.setBounds(140, 30, 120, 30);
+        
+        TodoPanel.add(editButton);
+        editButton.setBounds(270, 30, 120, 30);
+        
+        TodoPanel.add(deleteButton);
+        deleteButton.setBounds(400, 30, 120, 30);
+        
         TodoPanel.add(TodoScroll);
-        TodoScroll.setBounds(10, 60, 300, 450);
+        TodoScroll.setBounds(10, 80, 520, 500);
 
         mainPanel.add(TodoPanel);
     }

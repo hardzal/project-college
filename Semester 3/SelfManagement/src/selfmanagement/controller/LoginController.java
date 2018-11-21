@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import selfmanagement.model.Account;
-import selfmanagement.model.dao.LoginRegisterDAOImpl;
+import selfmanagement.model.dao.AccountDAOImpl;
 import selfmanagement.view.DashboardView;
 import selfmanagement.view.HomeView;
 import selfmanagement.model.Dashboard;
@@ -25,7 +25,7 @@ public class LoginController {
     private DashboardView dashboardView;
     private RegisterController registerController;
     private DashboardController dashboardController;
-    private LoginRegisterDAOImpl loginRegisterdaoimpl = new LoginRegisterDAOImpl();
+    private AccountDAOImpl loginRegisterdaoimpl = new AccountDAOImpl();
 
     public LoginController(HomeView homeView, Account account) {
         this.account = account;

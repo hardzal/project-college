@@ -20,7 +20,7 @@ import selfmanagement.model.database.Database;
  *
  * @author izal
  */
-public class LoginRegisterDAOImpl implements LoginRegisterDAO {
+public class AccountDAOImpl implements AccountDAO {
     PreparedStatement prepareStatement;
     Statement statement;
     ResultSet resultSet;
@@ -33,7 +33,6 @@ public class LoginRegisterDAOImpl implements LoginRegisterDAO {
     @Override
     public boolean insertAccount(Account ac) {
         try {
-//            boolean state = true;
             String sql = "SELECT * FROM accounts WHERE username = ? OR email = ?";
             prepareStatement = Database.getConnection().prepareStatement(sql);
             prepareStatement.setString(1, ac.getUsername());
@@ -43,21 +42,21 @@ public class LoginRegisterDAOImpl implements LoginRegisterDAO {
                 prepareStatement.close();
                 return false;
              }
-                resultSet.close();
-                prepareStatement.close();
-//            if(state) {
-                prepareStatement = Database.getConnection().prepareStatement(insert);
+            resultSet.close();
+            prepareStatement.close();
+            //// continue statement if true
+            prepareStatement = Database.getConnection().prepareStatement(insert);
 
-                prepareStatement.setString(1, ac.getUsername());
-                prepareStatement.setString(2, ac.getPassword());
-                prepareStatement.setString(3, "MEMBER");
-                prepareStatement.setString(4, ac.getNama());
-                prepareStatement.setString(5, ac.getEmail());
+            prepareStatement.setString(1, ac.getUsername());
+            prepareStatement.setString(2, ac.getPassword());
+            prepareStatement.setString(3, "MEMBER");
+            prepareStatement.setString(4, ac.getNama());
+            prepareStatement.setString(5, ac.getEmail());
 
-                if(prepareStatement.executeUpdate() > 0) {
-                    return true;
-                }
-                prepareStatement.close();
+            if(prepareStatement.executeUpdate() > 0) {
+                return true;
+            }
+            prepareStatement.close();
         } catch(SQLException er) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, er);
         }
@@ -75,7 +74,7 @@ public class LoginRegisterDAOImpl implements LoginRegisterDAO {
     }
 
     @Override
-    public List<Account> getAllAccount() {
+    public List<Account> getAllAccount(Account ac) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

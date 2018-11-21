@@ -20,12 +20,14 @@ import javax.swing.JButton;
  */
 public class DashboardView extends DefaultView {
     
-    public DashboardView() {    
+    public DashboardView() {
+        template(new String[]{"Dashboard"});
         initComponents();
+        initFrame();
     }
     
     public void initComponents() {
-        template(new String[]{"Dashboard", "Menu Panel"});
+        
     }
 
     public static void main(String[] args) {

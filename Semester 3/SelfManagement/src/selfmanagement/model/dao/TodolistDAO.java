@@ -5,10 +5,17 @@
  */
 package selfmanagement.model.dao;
 
+import java.util.List;
+import selfmanagement.model.Todolist;
 /**
  *
  * @author izal
  */
-public class TodolistDAO {
+public interface TodolistDAO {
     
+    public boolean insertTodolist(Todolist todo);
+    public boolean updateTodolist(Todolist todo);
+    public boolean deleteTodolist(int id);
+    public List<Todolist> getAllTodolist();
+    public List<Todolist> getTodolist();
 }

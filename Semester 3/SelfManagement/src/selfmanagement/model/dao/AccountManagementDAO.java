@@ -9,6 +9,6 @@ package selfmanagement.model.dao;
  *
  * @author izal
  */
-public class AccountManagementDAO {
+public interface AccountManagementDAO {
     
 }

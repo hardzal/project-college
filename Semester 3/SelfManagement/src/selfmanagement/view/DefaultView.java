@@ -23,6 +23,7 @@ abstract class DefaultView {
     JPanel bodyPanel;
     JPanel mainPanel;
     JPanel menuPanel;
+    JButton dashboardButton;
     JButton todoButton;
     JButton noteButton;
     JButton accountButton;
@@ -39,7 +40,7 @@ abstract class DefaultView {
     public void template(String label[]) {
         dashboardFrame = new JFrame(label[0] + " - SelfTodos App");
         dashboardFrame.setLayout(null);
-        dashboardFrame.setSize(600, 850);
+        dashboardFrame.setSize(800, 850);
         dashboardFrame.setLocationRelativeTo(null);
         dashboardFrame.setResizable(false);
         dashboardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +53,7 @@ abstract class DefaultView {
         dashboardLabel = new JLabel("");
         
         mainPanel = new JPanel();
-        mainLabel = new JLabel("Selamat datang!");
+        mainLabel = new JLabel("Welcome back");
         
         menuPanel = new JPanel();
         
@@ -60,6 +61,7 @@ abstract class DefaultView {
         noteLabel = new JLabel("Last Note : ");
         contactLabel = new JLabel("Contact Terakhir : ");
         
+        dashboardButton = new JButton("Dashboard");
         todoButton = new JButton("Todolist");
         noteButton = new JButton("Notes");
         accountmanagementButton = new JButton("Account List");
@@ -74,43 +76,47 @@ abstract class DefaultView {
         headerLabel.setBackground(Color.LIGHT_GRAY);
         
         headerPanel.setLayout(null);
-        headerPanel.setBounds(10, 10, 580, 100);
+        headerPanel.setBounds(10, 10, 780, 100);
         headerPanel.setBackground(Color.LIGHT_GRAY);
         headerPanel.add(headerLabel);
         
         menuPanel.setLayout(null);
-        menuPanel.setBounds(0, 10, 200, 590);
+        menuPanel.setBounds(0, 10, 200, 690);
         menuPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        todoButton.setBounds(10, 10, 180, 50);
+        dashboardButton.setBounds(10, 10, 180, 50);
+        dashboardButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        menuPanel.add(dashboardButton);
+        
+        todoButton.setBounds(10, 90, 180, 50);
         todoButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(todoButton);
         
-        noteButton.setBounds(10, 90, 180, 50);
+        noteButton.setBounds(10, 170, 180, 50);
         noteButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(noteButton);
         
-        accountmanagementButton.setBounds(10, 170, 180, 50);
+        accountmanagementButton.setBounds(10, 250, 180, 50);
         accountmanagementButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(accountmanagementButton);
         
-        contactButton.setBounds(10, 250, 180, 50);
+        contactButton.setBounds(10, 330, 180, 50);
         contactButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(contactButton);
         
-        accountButton.setBounds(10, 330, 180, 50);
+        accountButton.setBounds(10, 410, 180, 50);
         accountButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(accountButton);
         
-        logoutButton.setBounds(10, 410, 180, 50);
+        logoutButton.setBounds(10, 490, 180, 50);
         logoutButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(logoutButton);
         
         mainPanel.setLayout(null);
-        mainPanel.setBounds(180, 10, 400, 590);
+        mainPanel.setBounds(180, 10, 600, 690);
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         
-        mainLabel.setBounds(40, 10, 300, 50);
+        mainLabel.setBounds(40, 10, 200, 50);
         mainLabel.setFont(new Font("Sans-serif", Font.BOLD, 20));
         mainPanel.add(mainLabel);
         
@@ -121,7 +127,7 @@ abstract class DefaultView {
     
     public void initFrame() {
         bodyPanel.setLayout(null);
-        bodyPanel.setBounds(10, 100, 580, 600);
+        bodyPanel.setBounds(10, 100, 780, 700);
         
         bodyPanel.add(menuPanel);
         bodyPanel.add(mainPanel);

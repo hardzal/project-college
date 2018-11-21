@@ -5,10 +5,20 @@
  */
 package selfmanagement.model.dao;
 
+import java.util.List;
+import selfmanagement.model.Account;
+
 /**
  *
  * @author izal
  */
-public class AccountDAO {
+public interface AccountDAO {
+    
+    public boolean insertAccount(Account ac);
+    public boolean updateAccount();
+    public boolean deleteAccount();
+    public List<Account> getAllAccount(Account ac);
+    public List<Account> getAccount(Account ac);
+    public boolean checkLogin(String username, String password);
     
 }

@@ -7,10 +7,10 @@ package selfmanagement.controller;
 
 import javax.swing.JOptionPane;
 import selfmanagement.model.Account;
-import selfmanagement.model.dao.LoginRegisterDAO;
-import selfmanagement.model.dao.LoginRegisterDAOImpl;
+import selfmanagement.model.dao.AccountDAOImpl;
 import selfmanagement.view.HomeView;
 import selfmanagement.view.RegisterView;
+import selfmanagement.model.dao.AccountDAO;
 
 /**
  *
@@ -19,7 +19,7 @@ import selfmanagement.view.RegisterView;
 public class RegisterController {
     private RegisterView registerView;
     private Account account;
-    private LoginRegisterDAOImpl loginRegisterDAOImpl = new LoginRegisterDAOImpl();
+    private AccountDAOImpl loginRegisterDAOImpl = new AccountDAOImpl();
     
     public RegisterController(RegisterView registerView, Account account) {
         this.registerView = registerView;

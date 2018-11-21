@@ -11,17 +11,53 @@ package selfmanagement.model;
  */
 public class Todolist {
     private int id;
+    private int idUser;
     private int idCategory;
     private int idSchedule;
     private String title;
     private String detail;
     private String attachement;
     private int priority;
+    private String priorityName;
+    private int status;
+    private String username;
+    private String category;
     
     public Todolist() {
         
     }
 
+    public Todolist(int idUser, int idCategory, int idSchedule, String title, String detail, String attachement, int priority, int status, String username, String category) {
+        this.idUser = idUser;
+        this.idCategory = idCategory;
+        this.idSchedule = idSchedule;
+        this.title = title;
+        this.detail = detail;
+        this.attachement = attachement;
+        this.priority = priority;
+        this.status = status;
+        this.username = username;
+        this.category = category;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    
+    
     public int getId() {
         return id;
     }
@@ -30,6 +66,14 @@ public class Todolist {
         this.id = id;
     }
 
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+    
     public int getIdCategory() {
         return idCategory;
     }
@@ -76,5 +120,13 @@ public class Todolist {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
