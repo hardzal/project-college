@@ -36,7 +36,7 @@ public class TodolistView extends DefaultView {
     
     public void initComponents() {
         TodoPanel = new JPanel();
-        TodoModel = new DefaultTableModel(columnTable, 5);
+        TodoModel = new DefaultTableModel(columnTable, 0);
         TodoTable = new JTable(TodoModel);
         TodoScroll = new JScrollPane(TodoTable);
         addButton = new JButton("Add Todolist");
@@ -63,9 +63,9 @@ public class TodolistView extends DefaultView {
         TodoTable.setCellSelectionEnabled(true);
         TodoTable.getTableHeader().setReorderingAllowed(false);
         TodoTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        TodoTable.getColumnModel().getColumn(0).setPreferredWidth(70);
-        TodoTable.getColumnModel().getColumn(1).setPreferredWidth(350);
-        TodoTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+        TodoTable.getColumnModel().getColumn(0).setPreferredWidth(67);
+        TodoTable.getColumnModel().getColumn(1).setPreferredWidth(300);
+        TodoTable.getColumnModel().getColumn(2).setPreferredWidth(150);
         TodoScroll.setBounds(10, 80, 520, 500);
 
         mainPanel.add(TodoPanel);

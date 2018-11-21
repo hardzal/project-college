@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package selfmanagement.model.dao;
+package selfmanagement.controller;
 
 /**
  *
- * @author izal
+ * @author user
  */
-public interface ForgotPasswordDAO {
+public class AccountController {
     
 }

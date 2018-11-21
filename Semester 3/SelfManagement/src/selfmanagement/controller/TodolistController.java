@@ -31,6 +31,7 @@ public class TodolistController implements DefaultMenu {
         this.todolistView = todolistView;
         todolistDAOImpl = new TodolistDAOImpl();
         list = todolistDAOImpl.getAllTodolist();
+        todoFrame();
     }
     
     public void initTodo() {
@@ -41,16 +42,20 @@ public class TodolistController implements DefaultMenu {
         todolistView.getViewButton().addActionListener((ae) -> viewTodoFrame());
     }
     
-    public void reloadData() {
+    public void reloadData(List<Todolist> list) {
         try {
-            list = todolistDAOImpl.getAllTodolist();
             Object[] kolom = todolistView.getColumnTable();
             for(Todolist todo : list) {
                 Object[] isi = new Object[3];
-                isi[0] = todo.getStatus();
+                if(!Boolean.parseBoolean(String.valueOf(todo.getStatus()))) {
+                    isi[0] = "Progress";
+                } else {
+                    isi[0] = "Done";
+                }
                 isi[1] = todo.getTitle();
                 isi[2] = todo.getDateend();
                 todolistView.getTodoModel().addRow(isi);
+                System.out.println(isi[1]);
             }
             todolistView.getTodoTable().setModel(todolistView.getTodoModel());
         } catch(Exception er) {
@@ -74,7 +79,7 @@ public class TodolistController implements DefaultMenu {
     @Override
     public void todoFrame() {
         try {
-            reloadData();
+            reloadData(list);
             
         } catch(Exception er) {
             
