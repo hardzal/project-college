@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2018 at 03:46 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Nov 21, 2018 at 02:49 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,7 +44,9 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `level`, `nama`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'member0', 'password321', 'MEMBER', 'Member Pertama', 'membernol0@gmail.com', '2018-11-16 04:05:09', '2018-11-16 04:05:09');
+(1, 'member0', 'password321', 'MEMBER', 'Member Pertama', 'membernol0@gmail.com', '2018-11-16 04:05:09', '2018-11-16 04:05:09'),
+(2, 'member1', 'password', 'MEMBER', 'memberbaru@gmail.com', 'Member bar', '2018-11-18 14:55:16', '0000-00-00 00:00:00'),
+(3, 'member2', 'password', 'MEMBER', 'member2@gmail.com', 'member kedua', '2018-11-18 14:55:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -123,6 +125,15 @@ CREATE TABLE `priorities` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `priorities`
+--
+
+INSERT INTO `priorities` (`id`, `name`, `detail`, `created_at`, `updated_at`) VALUES
+(1, 'High', 'High Priority', '2018-11-21 01:30:00', '2018-11-21 01:30:00'),
+(2, 'Medium', 'Medium Priority', '2018-11-21 01:30:00', '2018-11-21 01:30:00'),
+(3, 'Low', 'Low Priority', '2018-11-21 01:30:00', '2018-11-21 01:30:00');
+
 -- --------------------------------------------------------
 
 --
@@ -131,12 +142,17 @@ CREATE TABLE `priorities` (
 
 CREATE TABLE `schedules` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `datestart` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `dateend` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `dateend`, `created_at`, `updated_at`) VALUES
+(1, '2018-11-23 01:25:52', '2018-11-21 01:25:47', '2018-11-21 01:25:47');
 
 -- --------------------------------------------------------
 
@@ -165,11 +181,19 @@ CREATE TABLE `todolists` (
   `id_schedule` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `detail` text,
-  `attachement` text NOT NULL,
+  `attachement` text,
   `priority` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `todolists`
+--
+
+INSERT INTO `todolists` (`id`, `id_user`, `id_category`, `id_schedule`, `title`, `detail`, `attachement`, `priority`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 'Doing something', 'Something great is coming', NULL, 2, 0, '2018-11-21 01:32:48', '2018-11-21 01:32:48');
 
 -- --------------------------------------------------------
 
@@ -297,7 +321,7 @@ ALTER TABLE `todolist_subtasks`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `account_managements`
@@ -327,13 +351,13 @@ ALTER TABLE `notes_categories`
 -- AUTO_INCREMENT for table `priorities`
 --
 ALTER TABLE `priorities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `statuses`
@@ -345,7 +369,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `todolists`
 --
 ALTER TABLE `todolists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `todolist_categories`
