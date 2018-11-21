@@ -10,12 +10,14 @@ import javax.swing.JOptionPane;
 import selfmanagement.model.Account;
 import selfmanagement.view.DashboardView;
 import selfmanagement.model.Dashboard;
+import selfmanagement.model.Todolist;
 import selfmanagement.view.HomeView;
+import selfmanagement.view.TodolistView;
 /**
  *
  * @author izal
  */
-public class DashboardController {
+public class DashboardController implements DefaultMenu {
     private DashboardView dashboardView;
     private Dashboard dashboard;
     
@@ -25,29 +27,74 @@ public class DashboardController {
     }
     
     public void initDashboard() {
+        dashboardView.getTodoButton().addActionListener((ae) -> todoFrame());
+        dashboardView.getNoteButton().addActionListener((ae) -> noteFrame());
+        dashboardView.getContactButton().addActionListener((ae) -> contactFrame());
+        dashboardView.getAccountmanagementButton().addActionListener((ae) -> accountManagementFrame());
+        dashboardView.getContactButton().addActionListener((ae) -> contactFrame());
+        dashboardView.getAccountButton().addActionListener((ae) -> accountFrame());
         dashboardView.getLogoutButton().addActionListener((ae) -> logout());
     }
     
-    public void todo() {
-        
+    @Override
+    public void dashboardFrame() {
+        try {
+            
+        } catch(Exception er) {
+            
+        }
     }
     
-    public void note() {
-        
+    @Override
+    public void todoFrame() {
+        try {
+            dashboardView.getDashboardFrame().dispose();
+            TodolistView todolistView = new TodolistView();
+            Todolist todolist = new Todolist();
+            TodolistController todo = new TodolistController(todolistView, todolist);
+            todo.initTodo();
+        } catch(Exception er) {
+            JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
     }
     
-    public void contact() {
-        
+    @Override
+    public void noteFrame() {
+        try {
+            
+        } catch(Exception er) {
+            
+        }
     }
     
-    public void accountManagement() {
-        
+    @Override
+    public void contactFrame() {
+        try {
+            
+        } catch(Exception er) {
+            
+        }
     }
     
-    public void account() {
-        
+    @Override
+    public void accountManagementFrame() {
+        try {
+            
+        } catch(Exception er){
+            
+        }
     }
     
+    @Override
+    public void accountFrame() {
+        try {
+            
+        } catch(Exception er) {
+            
+        }
+    }
+    
+    @Override
     public void logout() {
         try {
             dashboardView.getDashboardFrame().dispose();

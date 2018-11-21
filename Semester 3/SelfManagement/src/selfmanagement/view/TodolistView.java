@@ -36,7 +36,7 @@ public class TodolistView extends DefaultView {
     
     public void initComponents() {
         TodoPanel = new JPanel();
-        TodoModel = new DefaultTableModel(columnTable, 0);
+        TodoModel = new DefaultTableModel(columnTable, 5);
         TodoTable = new JTable(TodoModel);
         TodoScroll = new JScrollPane(TodoTable);
         addButton = new JButton("Add Todolist");
@@ -60,11 +60,89 @@ public class TodolistView extends DefaultView {
         deleteButton.setBounds(400, 30, 120, 30);
         
         TodoPanel.add(TodoScroll);
+        TodoTable.setCellSelectionEnabled(true);
+        TodoTable.getTableHeader().setReorderingAllowed(false);
+        TodoTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TodoTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+        TodoTable.getColumnModel().getColumn(1).setPreferredWidth(350);
+        TodoTable.getColumnModel().getColumn(2).setPreferredWidth(100);
         TodoScroll.setBounds(10, 80, 520, 500);
 
         mainPanel.add(TodoPanel);
     }
-    
+
+    public JPanel getTodoPanel() {
+        return TodoPanel;
+    }
+
+    public void setTodoPanel(JPanel TodoPanel) {
+        this.TodoPanel = TodoPanel;
+    }
+
+    public JTable getTodoTable() {
+        return TodoTable;
+    }
+
+    public void setTodoTable(JTable TodoTable) {
+        this.TodoTable = TodoTable;
+    }
+
+    public DefaultTableModel getTodoModel() {
+        return TodoModel;
+    }
+
+    public void setTodoModel(DefaultTableModel TodoModel) {
+        this.TodoModel = TodoModel;
+    }
+
+    public JScrollPane getTodoScroll() {
+        return TodoScroll;
+    }
+
+    public void setTodoScroll(JScrollPane TodoScroll) {
+        this.TodoScroll = TodoScroll;
+    }
+
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    public void setAddButton(JButton addButton) {
+        this.addButton = addButton;
+    }
+
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    public void setEditButton(JButton editButton) {
+        this.editButton = editButton;
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public void setDeleteButton(JButton deleteButton) {
+        this.deleteButton = deleteButton;
+    }
+
+    public JButton getViewButton() {
+        return viewButton;
+    }
+
+    public void setViewButton(JButton viewButton) {
+        this.viewButton = viewButton;
+    }
+
+    public Object[] getColumnTable() {
+        return columnTable;
+    }
+
+    public void setColumnTable(Object[] columnTable) {
+        this.columnTable = columnTable;
+    }
+
     public static void main(String[] args) {
         new TodolistView();
     }

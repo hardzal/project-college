@@ -177,6 +177,14 @@ abstract class DefaultView {
         this.menuPanel = menuPanel;
     }
 
+    public JButton getDashboardButton() {
+        return dashboardButton;
+    }
+
+    public void setDashboardButton(JButton dashboardButton) {
+        this.dashboardButton = dashboardButton;
+    }
+    
     public JButton getTodoButton() {
         return todoButton;
     }

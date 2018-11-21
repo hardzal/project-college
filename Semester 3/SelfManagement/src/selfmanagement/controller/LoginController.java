@@ -25,11 +25,12 @@ public class LoginController {
     private DashboardView dashboardView;
     private RegisterController registerController;
     private DashboardController dashboardController;
-    private AccountDAOImpl loginRegisterdaoimpl = new AccountDAOImpl();
+    private AccountDAOImpl loginRegisterdaoimpl; 
 
     public LoginController(HomeView homeView, Account account) {
         this.account = account;
         this.homeView = homeView;
+        loginRegisterdaoimpl = new AccountDAOImpl();
     }
     
     public void initLogin() {
@@ -45,6 +46,7 @@ public class LoginController {
                 JOptionPane.showMessageDialog(null, "Login Success!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 homeView.getHomeFrame().dispose();
                 dashboardView = new DashboardView();
+                dashboard = new Dashboard();
                 dashboardController = new DashboardController(dashboardView, dashboard);
                 dashboardController.initDashboard();
             } else {

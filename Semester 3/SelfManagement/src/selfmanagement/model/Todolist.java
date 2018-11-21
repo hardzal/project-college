@@ -22,12 +22,13 @@ public class Todolist {
     private int status;
     private String username;
     private String category;
+    private String dateend;
     
     public Todolist() {
         
     }
 
-    public Todolist(int idUser, int idCategory, int idSchedule, String title, String detail, String attachement, int priority, int status, String username, String category) {
+    public Todolist(int idUser, int idCategory, int idSchedule, String title, String detail, String attachement, int priority, String priorityName, int status, String username, String category, String dateend) {
         this.idUser = idUser;
         this.idCategory = idCategory;
         this.idSchedule = idSchedule;
@@ -35,9 +36,14 @@ public class Todolist {
         this.detail = detail;
         this.attachement = attachement;
         this.priority = priority;
+        this.priorityName = priorityName;
         this.status = status;
         this.username = username;
         this.category = category;
+        this.dateend = dateend;
+    }
+
+    public Todolist(String dateend) {
     }
 
     public String getUsername() {
@@ -55,8 +61,6 @@ public class Todolist {
     public void setCategory(String category) {
         this.category = category;
     }
-
-    
     
     public int getId() {
         return id;
@@ -90,6 +94,14 @@ public class Todolist {
         this.idSchedule = idSchedule;
     }
 
+    public String getDateend() {
+        return dateend;
+    }
+
+    public void setDateend(String dateend) {
+        this.dateend = dateend;
+    }
+    
     public String getTitle() {
         return title;
     }
@@ -122,6 +134,16 @@ public class Todolist {
         this.priority = priority;
     }
 
+    public String getPriorityName() {
+        return priorityName;
+    }
+
+    public void setPriorityName(String priorityName) {
+        this.priorityName = priorityName;
+    }
+
+    
+    
     public int getStatus() {
         return status;
     }

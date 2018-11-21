@@ -29,7 +29,7 @@ public class TodolistDAOImpl implements TodolistDAO {
     private final String delete = "DELETE FROM todolist WHERE id = ?";
     private final String select = 
      "SELECT \n" +
-"       todolists.id_user, accounts.username, todolists.id_category, todolist_categories.title AS category, todolists.id_schedule, schedules.dateend, todolists.title, todolists.detail, todolists.priority, priorities.name AS priority_name, todolists.status \n" +
+"       todolists.id_user, accounts.username, todolists.id_category, todolist_categories.title AS category, todolists.id_schedule, schedules.dateend, todolists.title, todolists.detail, todolists.attachement, todolists.priority, priorities.name AS priority_name, todolists.status \n" +
 "    FROM todolists \n" +
 "    INNER JOIN accounts ON accounts.id=todolists.id_user \n" +
 "    INNER JOIN schedules ON schedules.id=todolists.id_schedule \n" +
@@ -127,7 +127,8 @@ public class TodolistDAOImpl implements TodolistDAO {
                      resultSet.getString("priority_name"),
                      resultSet.getInt("status"),
                      resultSet.getString("username"),
-                     resultSet.getString("category")
+                     resultSet.getString("category"),
+                     resultSet.getString("dateend")
                 );
                 list.add(todo);
             }
