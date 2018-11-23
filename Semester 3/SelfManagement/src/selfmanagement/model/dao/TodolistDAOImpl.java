@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import selfmanagement.model.Account;
 import selfmanagement.model.Todolist;
+import selfmanagement.model.TodolistCategory;
 import selfmanagement.model.database.Database;
 
 /**
@@ -24,18 +25,10 @@ import selfmanagement.model.database.Database;
 public class TodolistDAOImpl implements TodolistDAO {
     private List<Todolist> list;
     
-    private final String insert = "INSERT INTO todolist(id_user, id_category, id_schedule, title, detail, attachement, priority, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String update = "UPDATE todolist SET id_category=?, id_schedule=?, title=?, detail=?, attachement=?, priority=?, status=? WHERE id=?";
+    private final String insert = "INSERT INTO todolists(id_user, id_category, schedule, title, detail, attachement, priority, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String update = "UPDATE todolist SET category_name=?, schedule=?, title=?, detail=?, attachement=?, priority=?, status=? WHERE id=?";
     private final String delete = "DELETE FROM todolist WHERE id = ?";
-    private final String select = 
-     "SELECT \n" +
-"       todolists.id_user, accounts.username, todolists.id_category, todolist_categories.title AS category, todolists.id_schedule, schedules.dateend, todolists.title, todolists.detail, todolists.attachement, todolists.priority, priorities.name AS priority_name, todolists.status \n" +
-"    FROM todolists \n" +
-"    INNER JOIN accounts ON accounts.id=todolists.id_user \n" +
-"    INNER JOIN schedules ON schedules.id=todolists.id_schedule \n" +
-"    INNER JOIN todolist_categories ON todolist_categories.id=todolists.id_category \n" +
-"    INNER JOIN priorities ON priorities.id=todolists.priority \n" +
-"    ORDER BY todolists.created_at DESC";
+    private final String select = "SELECT todolists.id_user, todolists.id_category, todolist_categories.title AS category_name, todolists.schedule, todolists.title, todolists.detail, todolists.attachement, todolists.priority, todolists.status FROM todolists INNER JOIN accounts ON todolists.id_user = accounts.id INNER JOIN todolist_categories ON todolists.id_category = todolist_categories.id ORDER BY todolists.status";
     private String title;
     private final String search = "SELECT * FROM todolist WHERE title LIKE %"+title+"%";
     
@@ -50,11 +43,11 @@ public class TodolistDAOImpl implements TodolistDAO {
             
             prepareStatement.setInt(1, todo.getIdUser());
             prepareStatement.setInt(2, todo.getIdCategory());
-            prepareStatement.setInt(3, todo.getIdSchedule());
+            prepareStatement.setString(3, todo.getSchedule());
             prepareStatement.setString(4, todo.getTitle());
             prepareStatement.setString(5, todo.getDetail());
             prepareStatement.setString(6, todo.getAttachement());
-            prepareStatement.setInt(7, todo.getPriority());
+            prepareStatement.setString(7, todo.getPriorityName());
             prepareStatement.setInt(8, todo.getStatus());
             
             if(prepareStatement.executeUpdate() > 0) {
@@ -72,14 +65,6 @@ public class TodolistDAOImpl implements TodolistDAO {
     public boolean updateTodolist(Todolist todo) {
         try {
             prepareStatement = Database.getConnection().prepareStatement(update);
-            
-            prepareStatement.setInt(1, todo.getIdCategory());
-            prepareStatement.setInt(2, todo.getIdSchedule());
-            prepareStatement.setString(3, todo.getTitle());
-            prepareStatement.setString(4, todo.getDetail());
-            prepareStatement.setString(5, todo.getAttachement());
-            prepareStatement.setInt(6, todo.getPriority());
-            prepareStatement.setInt(7, todo.getStatus());
             
             if(prepareStatement.executeUpdate() > 0) { 
                 prepareStatement.close();
@@ -119,19 +104,18 @@ public class TodolistDAOImpl implements TodolistDAO {
                 Todolist todo = new Todolist(
                      resultSet.getInt("id_user"),
                      resultSet.getInt("id_category"),
-                     resultSet.getInt("id_schedule"),
+                     resultSet.getString("category_name"),
+                     resultSet.getString("schedule"),
                      resultSet.getString("title"),
                      resultSet.getString("detail"),
                      resultSet.getString("attachement"),
-                     resultSet.getInt("priority"),
-                     resultSet.getString("priority_name"),
-                     resultSet.getInt("status"),
-                     resultSet.getString("username"),
-                     resultSet.getString("category"),
-                     resultSet.getString("dateend")
+                     resultSet.getString("priority"),
+                     resultSet.getInt("status")
                 );
                 list.add(todo);
             }
+            resultSet.close();
+            statement.close();
             return list;
         } catch (SQLException er) {
             Logger.getLogger(Todolist.class.getName()).log(Level.SEVERE, null, er);
@@ -150,6 +134,26 @@ public class TodolistDAOImpl implements TodolistDAO {
         } catch(SQLException er) {
             Logger.getLogger(Todolist.class.getName()).log(Level.SEVERE, null, er);
         }
+        return null;
+    }
+    
+    public List<TodolistCategory> getCategoryTodolist() {
+        List<TodolistCategory> listCategory = new ArrayList<TodolistCategory>();
+        
+        try {
+            statement = Database.getConnection().createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM todolist_categories");
+            while(resultSet.next()) {
+                TodolistCategory todolistCategory = new TodolistCategory();
+                todolistCategory.setName(resultSet.getString("title"));
+                listCategory.add(todolistCategory);
+            }
+            resultSet.close();
+            statement.close();
+            return listCategory;
+        } catch(SQLException er) {
+            Logger.getLogger(Todolist.class.getName()).log(Level.SEVERE, null, er);
+        }   
         return null;
     }
 }

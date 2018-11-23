@@ -37,7 +37,6 @@ public class RegisterController {
             account = new Account(
                     registerView.getUsername().getText(), 
                     registerView.getPassword().getText(), 
-                    "MEMBER", 
                     registerView.getName().getText(), 
                     registerView.getEmail().getText()
             );

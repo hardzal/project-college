@@ -51,6 +51,7 @@ public class DashboardController implements DefaultMenu {
             dashboardView.getDashboardFrame().dispose();
             TodolistView todolistView = new TodolistView();
             Todolist todolist = new Todolist();
+            todolist.setIdUser(dashboard.getIdUser());
             TodolistController todo = new TodolistController(todolistView, todolist);
             todo.initTodo();
         } catch(Exception er) {

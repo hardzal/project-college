@@ -13,7 +13,6 @@ public class Account {
     private int id;
     private String username;
     private String password;
-    private String level;
     private String email;
     private String nama;
     
@@ -21,10 +20,9 @@ public class Account {
         
     }
 
-    public Account(String username, String password, String level, String email, String nama) {
+    public Account(String username, String password, String email, String nama) {
         this.username = username;
         this.password = password;
-        this.level = level;
         this.email = email;
         this.nama = nama;
     }
@@ -52,15 +50,7 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
+    
     public String getEmail() {
         return email;
     }

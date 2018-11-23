@@ -10,5 +10,12 @@ package selfmanagement.view;
  * @author user
  */
 public class ContactlistFormView {
+ 
+    public ContactlistFormView() {
+        
+    }
     
+    public void initComponents() {
+        
+    }
 }

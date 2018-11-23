@@ -9,6 +9,15 @@ package selfmanagement.view;
  *
  * @author user
  */
-public class ContactlistView {
+public class ContactlistView extends DefaultView {
     
+    public ContactlistView() {
+        template(new String[]{"Contactlist"});
+        initComponents();
+        initFrame();
+    }
+    
+    public void initComponents() {
+        
+    }
 }

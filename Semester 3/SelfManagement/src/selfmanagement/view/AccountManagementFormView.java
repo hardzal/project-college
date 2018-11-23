@@ -11,4 +11,11 @@ package selfmanagement.view;
  */
 public class AccountManagementFormView {
     
+    public AccountManagementFormView() {
+        
+    }
+    
+    public void initComponents() {
+        
+    }
 }

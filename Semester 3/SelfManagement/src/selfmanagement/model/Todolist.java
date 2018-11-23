@@ -13,53 +13,31 @@ public class Todolist {
     private int id;
     private int idUser;
     private int idCategory;
-    private int idSchedule;
+    private String categoryName;
+    private String schedule;
     private String title;
     private String detail;
     private String attachement;
-    private int priority;
     private String priorityName;
     private int status;
-    private String username;
-    private String category;
-    private String dateend;
     
     public Todolist() {
         
     }
 
-    public Todolist(int idUser, int idCategory, int idSchedule, String title, String detail, String attachement, int priority, String priorityName, int status, String username, String category, String dateend) {
+    public Todolist(int idUser, int idCategory, String categoryName, String schedule, String title, String detail, String attachement, String priorityName, int status) {
         this.idUser = idUser;
         this.idCategory = idCategory;
-        this.idSchedule = idSchedule;
+        this.categoryName = categoryName;
+        this.schedule = schedule;
         this.title = title;
         this.detail = detail;
         this.attachement = attachement;
-        this.priority = priority;
         this.priorityName = priorityName;
         this.status = status;
-        this.username = username;
-        this.category = category;
-        this.dateend = dateend;
     }
 
     public Todolist(String dateend) {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
     
     public int getId() {
@@ -77,7 +55,7 @@ public class Todolist {
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
-    
+
     public int getIdCategory() {
         return idCategory;
     }
@@ -85,23 +63,23 @@ public class Todolist {
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
     }
-
-    public int getIdSchedule() {
-        return idSchedule;
-    }
-
-    public void setIdSchedule(int idSchedule) {
-        this.idSchedule = idSchedule;
-    }
-
-    public String getDateend() {
-        return dateend;
-    }
-
-    public void setDateend(String dateend) {
-        this.dateend = dateend;
-    }
     
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -126,14 +104,6 @@ public class Todolist {
         this.attachement = attachement;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
     public String getPriorityName() {
         return priorityName;
     }
@@ -142,8 +112,6 @@ public class Todolist {
         this.priorityName = priorityName;
     }
 
-    
-    
     public int getStatus() {
         return status;
     }

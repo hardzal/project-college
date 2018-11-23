@@ -5,6 +5,7 @@
  */
 package selfmanagement.controller;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import selfmanagement.model.dao.AccountDAOImpl;
 import selfmanagement.view.DashboardView;
 import selfmanagement.view.HomeView;
 import selfmanagement.model.Dashboard;
+import selfmanagement.model.database.Database;
 import selfmanagement.view.RegisterView;
 /**
  *
@@ -42,17 +44,28 @@ public class LoginController {
     
     public void login() {
         try {
-            if(loginRegisterdaoimpl.checkLogin(homeView.getUsernameField().getText(), homeView.getPasswordField().getText())) {
-                JOptionPane.showMessageDialog(null, "Login Success!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                homeView.getHomeFrame().dispose();
-                dashboardView = new DashboardView();
-                dashboard = new Dashboard();
-                dashboardController = new DashboardController(dashboardView, dashboard);
-                dashboardController.initDashboard();
+            if(!homeView.getUsernameField().getText().trim().isEmpty() && !homeView.getPasswordField().getText().trim().isEmpty()) {
+                if(Database.getConnection() != null) {
+                    if(loginRegisterdaoimpl.checkLogin(homeView.getUsernameField().getText().trim(), homeView.getPasswordField().getText().trim())) {
+                        JOptionPane.showMessageDialog(null, "Login Success!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        homeView.getHomeFrame().dispose();
+                        dashboardView = new DashboardView();
+                        dashboard = new Dashboard();
+                        dashboard.setIdUser(loginRegisterdaoimpl.getIdUser());
+                        dashboardController = new DashboardController(dashboardView, dashboard);
+                        dashboardController.initDashboard();
+                    } else {
+                        reset();
+                        JOptionPane.showMessageDialog(null, "Username/Passsword Wrong!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Database belum terkoneksi");
+                } 
             } else {
-                JOptionPane.showMessageDialog(null, "Username/Passsword Wrong!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please Fill Username/Password Field!", "ERROR",  JOptionPane.ERROR_MESSAGE);
             }
-        } catch(Exception er) {
+        }
+       catch(Exception er) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, er);
         }
     }

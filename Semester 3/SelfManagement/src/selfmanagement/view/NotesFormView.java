@@ -11,4 +11,11 @@ package selfmanagement.view;
  */
 public class NotesFormView {
     
+    public NotesFormView() {
+        
+    }
+    
+    public void initComponents() {
+        
+    }
 }

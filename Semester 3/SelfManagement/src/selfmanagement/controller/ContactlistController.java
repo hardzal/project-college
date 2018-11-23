@@ -5,10 +5,23 @@
  */
 package selfmanagement.controller;
 
+import selfmanagement.view.ContactlistView;
+import selfmanagement.model.Contactlist;
+
 /**
  *
  * @author user
  */
 public class ContactlistController {
+    private ContactlistView contactlistView;
+    private Contactlist contactlist;
     
+    public ContactlistController(ContactlistView contactlistView, Contactlist contactlist) {
+        this.contactlistView = contactlistView;
+        this.contactlist = contactlist;
+    }
+    
+    public void initContactlist() {
+        
+    }
 }

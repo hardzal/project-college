@@ -8,6 +8,7 @@ package selfmanagement.model.database;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Database {
                 Class.forName(libDB);
                 connection = (Connection) DriverManager.getConnection(hostDB, usernameDB, passwordDB);
             } catch(ClassNotFoundException | SQLException er) {
+                JOptionPane.showMessageDialog(null, er, "ERROR", 0);
                 er.printStackTrace();
                 return null;
             }

@@ -21,14 +21,15 @@ import selfmanagement.model.database.Database;
  * @author izal
  */
 public class AccountDAOImpl implements AccountDAO {
+    private int id;
     PreparedStatement prepareStatement;
     Statement statement;
     ResultSet resultSet;
-    final String insert = "INSERT INTO accounts(username, password, level, nama, email) VALUES(?, ?, ?, ?, ?)";
+    final String insert = "INSERT INTO accounts(username, password, name, email) VALUES(?, ?, ?, ?)";
     final String update = "";
     final String delete = "";
     final String selectAll = "";
-    final String select = "SELECT username, password FROM accounts WHERE username=? AND password=?";
+    final String select = "SELECT * FROM accounts WHERE username=? AND password=?";
     
     @Override
     public boolean insertAccount(Account ac) {
@@ -49,9 +50,8 @@ public class AccountDAOImpl implements AccountDAO {
 
             prepareStatement.setString(1, ac.getUsername());
             prepareStatement.setString(2, ac.getPassword());
-            prepareStatement.setString(3, "MEMBER");
-            prepareStatement.setString(4, ac.getNama());
-            prepareStatement.setString(5, ac.getEmail());
+            prepareStatement.setString(3, ac.getNama());
+            prepareStatement.setString(4, ac.getEmail());
 
             if(prepareStatement.executeUpdate() > 0) {
                 return true;
@@ -94,12 +94,17 @@ public class AccountDAOImpl implements AccountDAO {
             if(!resultSet.next()) {
                 return false;
             } 
+            this.id = resultSet.getInt("id");
             resultSet.close();
             prepareStatement.close();
         } catch(SQLException er) {
             Logger.getLogger(Account.class.getName()).log(Level.SEVERE, null, er);
         }
         return true;
+    }
+    
+    public int getIdUser() {
+        return id;
     }
 }
 

@@ -5,10 +5,23 @@
  */
 package selfmanagement.controller;
 
+import selfmanagement.view.AccountView;
+import selfmanagement.model.Account;
+
 /**
  *
  * @author user
  */
 public class AccountController {
+    private AccountView accountView;
+    private Account account;
     
+    public AccountController(AccountView accountView, Account account) {
+        this.accountView = accountView;
+        this.account = account;
+    } 
+    
+    public void initAccount() {
+        
+    }
 }

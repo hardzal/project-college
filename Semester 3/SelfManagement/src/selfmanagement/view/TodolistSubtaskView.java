@@ -11,4 +11,11 @@ package selfmanagement.view;
  */
 public class TodolistSubtaskView {
     
+    public TodolistSubtaskView() {
+        
+    }
+    
+    public void initComponents() {
+        
+    }
 }

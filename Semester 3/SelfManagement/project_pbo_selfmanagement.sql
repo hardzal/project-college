@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 02:49 AM
+-- Generation Time: Nov 23, 2018 at 03:01 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -30,23 +30,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `level` enum('ADMIN','MEMBER') NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `username`, `password`, `level`, `nama`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'member0', 'password321', 'MEMBER', 'Member Pertama', 'membernol0@gmail.com', '2018-11-16 04:05:09', '2018-11-16 04:05:09'),
-(2, 'member1', 'password', 'MEMBER', 'memberbaru@gmail.com', 'Member bar', '2018-11-18 14:55:16', '0000-00-00 00:00:00'),
-(3, 'member2', 'password', 'MEMBER', 'member2@gmail.com', 'member kedua', '2018-11-18 14:55:44', '0000-00-00 00:00:00');
+INSERT INTO `accounts` (`id`, `username`, `password`, `name`, `email`) VALUES
+(1, 'MemberMaster', '1234567', 'membermaster@gmail.com', 'memberBaru');
 
 -- --------------------------------------------------------
 
@@ -56,13 +51,10 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `level`, `nama`, `email`, 
 
 CREATE TABLE `account_managements` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `platform` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `platform` varchar(100) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -74,10 +66,8 @@ CREATE TABLE `account_managements` (
 CREATE TABLE `contactlists` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `noHp` varchar(12) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `name` varchar(100) NOT NULL,
+  `no_hp` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -89,12 +79,9 @@ CREATE TABLE `contactlists` (
 CREATE TABLE `notes` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_category` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `detail` text,
-  `attachement` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `detail` text NOT NULL,
+  `attachement` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -106,66 +93,7 @@ CREATE TABLE `notes` (
 CREATE TABLE `notes_categories` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `detail` text,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `priorities`
---
-
-CREATE TABLE `priorities` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `detail` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `priorities`
---
-
-INSERT INTO `priorities` (`id`, `name`, `detail`, `created_at`, `updated_at`) VALUES
-(1, 'High', 'High Priority', '2018-11-21 01:30:00', '2018-11-21 01:30:00'),
-(2, 'Medium', 'Medium Priority', '2018-11-21 01:30:00', '2018-11-21 01:30:00'),
-(3, 'Low', 'Low Priority', '2018-11-21 01:30:00', '2018-11-21 01:30:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `schedules`
---
-
-CREATE TABLE `schedules` (
-  `id` int(11) NOT NULL,
-  `dateend` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `schedules`
---
-
-INSERT INTO `schedules` (`id`, `dateend`, `created_at`, `updated_at`) VALUES
-(1, '2018-11-23 01:25:52', '2018-11-21 01:25:47', '2018-11-21 01:25:47');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `statuses`
---
-
-CREATE TABLE `statuses` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `detail` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -178,22 +106,49 @@ CREATE TABLE `todolists` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_category` int(11) NOT NULL,
-  `id_schedule` int(11) NOT NULL,
+  `schedule` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `title` varchar(255) NOT NULL,
   `detail` text,
   `attachement` text,
-  `priority` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `priority` varchar(32) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `todolists`
 --
 
-INSERT INTO `todolists` (`id`, `id_user`, `id_category`, `id_schedule`, `title`, `detail`, `attachement`, `priority`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'Doing something', 'Something great is coming', NULL, 2, 0, '2018-11-21 01:32:48', '2018-11-21 01:32:48');
+INSERT INTO `todolists` (`id`, `id_user`, `id_category`, `schedule`, `title`, `detail`, `attachement`, `priority`, `status`) VALUES
+(1, 1, 1, '2018-11-25 14:25:42', 'Hello World', 'Hello world kokoni iru', 'SESUATU.JPG', 'HIGH', 0),
+(2, 1, 1, '2018-11-22 15:22:45', 'Belajar Hal Baru', 'Here we go!', 'LINK FILE IMAGE HERE', 'High', 0),
+(3, 1, 2, '2019-12-11 17:00:00', 'Belajar sekali', 'Starting!', 'LINK FILE IMAGE HERE', 'Medium', 0),
+(4, 1, 1, '2020-12-15 10:00:00', 'Belajar lagi deh mending hehehe', 'Let\'s do it!', 'LINK FILE IMAGE HERE', 'High', 0),
+(5, 1, 2, '2018-11-22 15:39:24', 'Hello World hehe', 'Start a new language', 'LINK FILE IMAGE HERE', 'Medium', 0),
+(6, 1, 2, '2018-11-22 15:39:17', 'Hello World deh lagi aja', 'Ayo ayo kawan semua', 'LINK FILE IMAGE HERE', 'High', 0),
+(7, 1, 2, '2019-04-15 08:00:34', 'Belajar Hal baru kembali', 'Start!', 'LINK FILE IMAGE HERE', 'Medium', 0),
+(8, 1, 1, '2018-12-31 09:32:32', 'Belajar CPP', 'Hello World!', 'LINK FILE IMAGE HERE', 'High', 0),
+(9, 1, 1, '2018-12-30 05:30:30', 'Belajar Java', 'Hello Starting right now', 'LINK FILE IMAGE HERE', 'High', 0),
+(10, 1, 1, '2019-01-01 05:30:30', 'Belajar Scala', 'Belajar sesuatu yang baru', 'LINK FILE IMAGE HERE', 'High', 0),
+(11, 1, 1, '2018-11-21 17:00:00', 'Belajar Softskill', 'Baru belajar', 'LINK FILE IMAGE HERE', 'High', 0),
+(12, 1, 1, '2019-01-01 17:00:00', 'Freelance', 'Baru saja dimulai', 'LINK FILE IMAGE HERE', 'High', 0),
+(13, 1, 1, '2018-12-31 17:00:00', 'Belajar untuk displin', 'Perjalanan baru saja dimulai', 'LINK FILE IMAGE HERE', 'High', 0),
+(14, 1, 1, '2018-11-22 17:00:00', 'Belajar jangan pernah menyerah', 'Mari berjuang bersama', 'LINK FILE IMAGE HERE', 'High', 0),
+(15, 1, 1, '2018-11-23 17:00:00', 'Pasti bisa', 'Baru dimulai', 'LINK FILE IMAGE HERE', 'High', 0),
+(16, 1, 1, '2018-12-11 17:00:00', 'Baru mulai', 'Baru coba', 'LINK FILE IMAGE HERE', 'High', 0),
+(17, 1, 1, '2018-12-01 05:21:12', 'Baru lagi', 'coba terus', 'LINK FILE IMAGE HERE', 'High', 0),
+(18, 1, 1, '2018-12-11 17:00:00', 'baru coba', 'test', 'LINK FILE IMAGE HERE', 'High', 0),
+(19, 1, 1, '2018-12-12 16:00:32', 'ayolah', 'teststs', 'LINK FILE IMAGE HERE', 'High', 0),
+(20, 1, 1, '2018-12-12 05:12:12', 'coba lagi', 'teststs', 'LINK FILE IMAGE HERE', 'High', 0),
+(21, 1, 1, '2018-12-12 05:12:12', 'berhasil sih tapi', 'tetsts', 'LINK FILE IMAGE HERE', 'High', 0),
+(22, 1, 1, '2018-12-12 18:01:01', 'Hello coba lgi', 'tetsts', 'LINK FILE IMAGE HERE', 'High', 0),
+(23, 1, 2, '2018-12-13 06:13:13', 'kita coba yuk', 'Testtt', 'LINK FILE IMAGE HERE', 'Medium', 0),
+(24, 1, 1, '2018-12-12 17:00:00', 'Semangat try and error', 'tets', 'LINK FILE IMAGE HERE', 'High', 0),
+(25, 1, 1, '2018-12-12 17:00:00', 'pernah berhasil', 'test lagi', 'LINK FILE IMAGE HERE', 'High', 0),
+(26, 1, 1, '2018-12-01 05:01:01', 'Semangat selalu', 'testt', 'LINK FILE IMAGE HERE', 'High', 0),
+(27, 1, 1, '2018-11-30 17:00:00', 'belajar java', 'test', 'LINK FILE IMAGE HERE', 'High', 0),
+(28, 1, 1, '2018-11-25 17:00:00', 'belajar java++', 'teetsts', 'LINK FILE IMAGE HERE', 'High', 0),
+(29, 1, 1, '2018-11-26 17:00:00', 'Coba terus', 'tetete', 'LINK FILE IMAGE HERE', 'High', 0),
+(30, 1, 1, '2018-11-28 17:00:00', 'bismillah', 'teststs', 'LINK FILE IMAGE HERE', 'High', 0);
 
 -- --------------------------------------------------------
 
@@ -203,35 +158,18 @@ INSERT INTO `todolists` (`id`, `id_user`, `id_category`, `id_schedule`, `title`,
 
 CREATE TABLE `todolist_categories` (
   `id` int(11) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `detail` text,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `title` varchar(255) NOT NULL,
+  `detail` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `todolist_categories`
 --
 
-INSERT INTO `todolist_categories` (`id`, `title`, `detail`, `created_at`, `updated_at`) VALUES
-(1, 'Work', 'Todolist for working', '2018-11-16 12:38:03', '2018-11-16 12:38:03'),
-(2, 'Learn', 'For learning purpose', '2018-11-16 12:38:03', '2018-11-16 12:38:03'),
-(3, 'Travel', 'For Travel Purpose', '2018-11-16 12:38:03', '2018-11-16 12:38:03');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `todolist_subtasks`
---
-
-CREATE TABLE `todolist_subtasks` (
-  `id` int(11) NOT NULL,
-  `id_todo` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `detail` text,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `todolist_categories` (`id`, `title`, `detail`) VALUES
+(1, 'Working', 'Working Todo'),
+(2, 'Learning', 'Learning Something'),
+(3, 'Travelling', 'Travelling again');
 
 --
 -- Indexes for dumped tables
@@ -247,23 +185,19 @@ ALTER TABLE `accounts`
 -- Indexes for table `account_managements`
 --
 ALTER TABLE `account_managements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `accountmanagement_id` (`id_user`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contactlists`
 --
 ALTER TABLE `contactlists`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `contactlist_id` (`id_user`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `notes`
 --
 ALTER TABLE `notes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `notes_id` (`id_user`),
-  ADD KEY `notescategory_id` (`id_category`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `notes_categories`
@@ -272,46 +206,16 @@ ALTER TABLE `notes_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `priorities`
---
-ALTER TABLE `priorities`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `schedules`
---
-ALTER TABLE `schedules`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `statuses`
---
-ALTER TABLE `statuses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `status_id` (`id_user`) USING BTREE;
-
---
 -- Indexes for table `todolists`
 --
 ALTER TABLE `todolists`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `todolist_id` (`id_user`),
-  ADD KEY `categorytodo_id` (`id_category`),
-  ADD KEY `schedule_id` (`id_schedule`),
-  ADD KEY `priority_id` (`priority`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `todolist_categories`
 --
 ALTER TABLE `todolist_categories`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `todolist_subtasks`
---
-ALTER TABLE `todolist_subtasks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `subtask_id` (`id_todo`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -321,7 +225,7 @@ ALTER TABLE `todolist_subtasks`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `account_managements`
@@ -348,84 +252,16 @@ ALTER TABLE `notes_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `priorities`
---
-ALTER TABLE `priorities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `schedules`
---
-ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `statuses`
---
-ALTER TABLE `statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `todolists`
 --
 ALTER TABLE `todolists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `todolist_categories`
 --
 ALTER TABLE `todolist_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `todolist_subtasks`
---
-ALTER TABLE `todolist_subtasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `account_managements`
---
-ALTER TABLE `account_managements`
-  ADD CONSTRAINT `accounts` FOREIGN KEY (`id_user`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `contactlists`
---
-ALTER TABLE `contactlists`
-  ADD CONSTRAINT `contactlist_id` FOREIGN KEY (`id_user`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `notes`
---
-ALTER TABLE `notes`
-  ADD CONSTRAINT `notes_id` FOREIGN KEY (`id_user`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notescategory_id` FOREIGN KEY (`id_category`) REFERENCES `notes_categories` (`id`);
-
---
--- Constraints for table `statuses`
---
-ALTER TABLE `statuses`
-  ADD CONSTRAINT `id_accounts` FOREIGN KEY (`id_user`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `todolists`
---
-ALTER TABLE `todolists`
-  ADD CONSTRAINT `categorytodo_id` FOREIGN KEY (`id_category`) REFERENCES `todolist_categories` (`id`),
-  ADD CONSTRAINT `priority_id` FOREIGN KEY (`priority`) REFERENCES `priorities` (`id`),
-  ADD CONSTRAINT `schedule_id` FOREIGN KEY (`id_schedule`) REFERENCES `schedules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `todolist_id` FOREIGN KEY (`id_user`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `todolist_subtasks`
---
-ALTER TABLE `todolist_subtasks`
-  ADD CONSTRAINT `subtask_id` FOREIGN KEY (`id_todo`) REFERENCES `todolists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

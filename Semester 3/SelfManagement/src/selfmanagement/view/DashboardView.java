@@ -29,8 +29,4 @@ public class DashboardView extends DefaultView {
     public void initComponents() {
         
     }
-
-    public static void main(String[] args) {
-        new DashboardView();
-    }
 }
