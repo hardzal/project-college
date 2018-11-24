@@ -28,7 +28,7 @@ public class TodolistDAOImpl implements TodolistDAO {
     private final String insert = "INSERT INTO todolists(id_user, id_category, schedule, title, detail, attachement, priority, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     private final String update = "UPDATE todolist SET category_name=?, schedule=?, title=?, detail=?, attachement=?, priority=?, status=? WHERE id=?";
     private final String delete = "DELETE FROM todolist WHERE id = ?";
-    private final String select = "SELECT todolists.id_user, todolists.id_category, todolist_categories.title AS category_name, todolists.schedule, todolists.title, todolists.detail, todolists.attachement, todolists.priority, todolists.status FROM todolists INNER JOIN accounts ON todolists.id_user = accounts.id INNER JOIN todolist_categories ON todolists.id_category = todolist_categories.id ORDER BY todolists.status";
+    private final String select = "SELECT todolists.id, todolists.id_user, todolists.id_category, todolist_categories.title AS category_name, todolists.schedule, todolists.title, todolists.detail, todolists.attachement, todolists.priority, todolists.status FROM todolists INNER JOIN accounts ON todolists.id_user = accounts.id INNER JOIN todolist_categories ON todolists.id_category = todolist_categories.id ORDER BY todolists.status";
     private String title;
     private final String search = "SELECT * FROM todolist WHERE title LIKE %"+title+"%";
     
@@ -102,6 +102,7 @@ public class TodolistDAOImpl implements TodolistDAO {
             resultSet = statement.executeQuery(select);
             while(resultSet.next()) {
                 Todolist todo = new Todolist(
+                     resultSet.getInt("id"),
                      resultSet.getInt("id_user"),
                      resultSet.getInt("id_category"),
                      resultSet.getString("category_name"),

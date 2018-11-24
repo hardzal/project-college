@@ -58,23 +58,19 @@ public class TodolistController implements DefaultMenu {
         todolistView.getLogoutButton().addActionListener((ae) -> logout());
         todolistView.getAddButton().addActionListener((ae) -> addTodoFrame());
         todolistView.getEditButton().addActionListener((ae) -> editTodoFrame());
-        todolistView.getDeleteButton().addActionListener((ae) -> deleteTodoFrame());
         todolistView.getViewButton().addActionListener((ae) -> viewTodoFrame());
         
-        todolistView.getTodoTable().addMouseListener(new MouseAdapter() {
-            
-            public void mouseClicked(MouseEvent me){
-                
-                try {
-                    row = todolistView.getTodoTable().getSelectedRow();
-                    todolistView.getDeleteButton().setEnabled(true);
-                }catch(Exception ex){
-                    System.out.println("Error disini " + ex.getMessage());
-                }
-                
+        todolistView.getDeleteButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                deleteTodoFrame();
             }
+        });
         
-        
+        todolistView.getTodoTable().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                selectRow();
+            }
         });
     }
     
@@ -82,6 +78,8 @@ public class TodolistController implements DefaultMenu {
         try {
             todolistView.getDashboardFrame().dispose();
             todolistView.getDashboardFrame().setVisible(true);
+            Object[] kolom = todolistView.getColumnTable();
+            DefaultTableModel todoModel = new DefaultTableModel(kolom, 0);
             if(!list.isEmpty() && list != null) {
                // TodolistView todoView = new TodolistView();
                 for(Todolist todo : list) {
@@ -93,9 +91,10 @@ public class TodolistController implements DefaultMenu {
                     }
                     isi[1] = todo.getTitle();
                     isi[2] = todo.getSchedule();
-                    todolistView.getTodoModel().addRow(isi);
+//                    todolistView.getTodoModel().addRow(isi);
+                    todoModel.addRow(isi);
                 }
-                todolistView.getTodoTable().setModel(todolistView.getTodoModel());
+                todolistView.getTodoTable().setModel(todoModel);
                 todolistView.getTodoTable().getColumnModel().getColumn(0).setPreferredWidth(67);
                 todolistView.getTodoTable().getColumnModel().getColumn(1).setPreferredWidth(300);
                 todolistView.getTodoTable().getColumnModel().getColumn(2).setPreferredWidth(150);
@@ -124,24 +123,7 @@ public class TodolistController implements DefaultMenu {
     public void todoFrame() {
         try {
             todolistView.getDashboardFrame().dispose();
-            Object[] kolom = todolistView.getColumnTable();
-            DefaultTableModel todoModel = new DefaultTableModel(kolom, 0);
-            for(Todolist todo : list) {
-                Object[] isi = new Object[3];
-                if(!Boolean.parseBoolean(String.valueOf(todo.getStatus()))) {
-                    isi[0] = "Progress";
-                } else {
-                    isi[0] = "Done";
-                }
-                isi[1] = todo.getTitle();
-                isi[2] = todo.getSchedule();
-                todoModel.addRow(isi);
-            }
-            todolistView.getDashboardFrame().setVisible(true);
-            todolistView.getTodoTable().setModel(todoModel);
-            todolistView.getTodoTable().getColumnModel().getColumn(0).setPreferredWidth(67);
-            todolistView.getTodoTable().getColumnModel().getColumn(1).setPreferredWidth(300);
-            todolistView.getTodoTable().getColumnModel().getColumn(2).setPreferredWidth(150);
+            reloadData(list);
         } catch(Exception er) {
             
         }
@@ -262,19 +244,31 @@ public class TodolistController implements DefaultMenu {
     
     public void deleteTodoFrame() {
         try {
+//            todolistView.setTodoModel((DefaultTableModel) todolistView.getTodoTable().getModel());
             int input = JOptionPane.showConfirmDialog(null, "Apa Anda Yakin?","",JOptionPane.YES_NO_OPTION);
             if(input == 0) {
-                todolistView.getTodoModel().removeRow(row);                
+                todolistView.setTodoModel((DefaultTableModel) todolistView.getTodoTable().getModel());
+                todolistView.getTodoModel().removeRow(row);      
+//                todolistDAOImpl.deleteTodolist(todolistView.getTodoTable().get);
                 todolistView.getDeleteButton().setEnabled(false);
                 JOptionPane.showMessageDialog(null, "Berhasil menghapus data");
-            } else {
-                JOptionPane.showMessageDialog(null, "Gagal menghapus");
-            }
+            } 
         } catch(Exception er) {
+ 
+            JOptionPane.showMessageDialog(null, "Gagal menghapus");
             er.printStackTrace();
         }
     }
     
+    public void selectRow() {
+        try {
+            row = todolistView.getTodoTable().getSelectedRow();
+            todolistView.getDeleteButton().setEnabled(true);
+        }catch(Exception ex){
+            System.out.println("Error disini " + ex.getMessage());
+        }
+    }
+   
     public void viewTodoFrame() {
         try {
         } catch(Exception er) {

@@ -25,7 +25,7 @@ public class Todolist {
         
     }
 
-    public Todolist(int idUser, int idCategory, String categoryName, String schedule, String title, String detail, String attachement, String priorityName, int status) {
+    public Todolist(int id, int idUser, int idCategory, String categoryName, String schedule, String title, String detail, String attachement, String priorityName, int status) {
         this.idUser = idUser;
         this.idCategory = idCategory;
         this.categoryName = categoryName;
