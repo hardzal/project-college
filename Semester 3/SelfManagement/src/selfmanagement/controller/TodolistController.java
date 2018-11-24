@@ -102,7 +102,7 @@ public class TodolistController implements DefaultMenu {
                 JOptionPane.showMessageDialog(null,"Data belum tersedia!", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch(Exception er) {
-            JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);
+            error_log(er);
         }
     }
     
@@ -114,8 +114,7 @@ public class TodolistController implements DefaultMenu {
             DashboardController dashboardController = new DashboardController(dashboardView, dashboard);
             dashboardController.initDashboard();
         } catch(Exception er) {
-            er.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);
+            error_log(er);
         }
     }
 
@@ -125,7 +124,7 @@ public class TodolistController implements DefaultMenu {
             todolistView.getDashboardFrame().dispose();
             reloadData(list);
         } catch(Exception er) {
-            
+            error_log(er);
         }
     }
 
@@ -138,7 +137,7 @@ public class TodolistController implements DefaultMenu {
             NotesController notesController = new NotesController(notesView, notes);
             notesController.initNotes();
         } catch(Exception er) {
-            
+            error_log(er);
         }
     }
 
@@ -147,7 +146,7 @@ public class TodolistController implements DefaultMenu {
         try {
             
         } catch(Exception er) {
-            
+            error_log(er);
         }
     }
 
@@ -156,7 +155,7 @@ public class TodolistController implements DefaultMenu {
         try {
             
         } catch(Exception er) {
-            
+            error_log(er);
         }
     }
 
@@ -165,20 +164,23 @@ public class TodolistController implements DefaultMenu {
         try {
             
         } catch(Exception er) {
-            
+            error_log(er);
         }
     }
 
     @Override
     public void logout() {
         try {
-            todolistView.getDashboardFrame().dispose();
-            HomeView homeView = new HomeView();
-            Account account = new Account();
-            LoginController loginController = new LoginController(homeView, account);
-            loginController.initLogin();
+            int input = JOptionPane.showConfirmDialog(null, "Ingin Logout?","",JOptionPane.YES_NO_OPTION);
+            if(input == 0) {
+                todolistView.getDashboardFrame().dispose();
+                HomeView homeView = new HomeView();
+                Account account = new Account();
+                LoginController loginController = new LoginController(homeView, account);
+                loginController.initLogin();
+            } 
         } catch(Exception er) {
-            JOptionPane.showMessageDialog(null, "ERROR", "Gagal Logout!", JOptionPane.ERROR_MESSAGE);
+            error_log(er);
         }
     }
     
@@ -230,15 +232,16 @@ public class TodolistController implements DefaultMenu {
                }
            });
       } catch(Exception er) {
-           
+           error_log(er);
        }
     }
     
     public void editTodoFrame() {
         try {
+            todolistFormView.getTodoFrame().setVisible(true);
             
         } catch(Exception er) {
-            
+            error_log(er);
         }
     }
     
@@ -254,25 +257,16 @@ public class TodolistController implements DefaultMenu {
                 JOptionPane.showMessageDialog(null, "Berhasil menghapus data");
             } 
         } catch(Exception er) {
- 
-            JOptionPane.showMessageDialog(null, "Gagal menghapus");
-            er.printStackTrace();
-        }
-    }
-    
-    public void selectRow() {
-        try {
-            row = todolistView.getTodoTable().getSelectedRow();
-            todolistView.getDeleteButton().setEnabled(true);
-        }catch(Exception ex){
-            System.out.println("Error disini " + ex.getMessage());
+            error_log(er);
         }
     }
    
     public void viewTodoFrame() {
         try {
-        } catch(Exception er) {
+            todolistFormView.getTodoFrame().setVisible(true);
             
+        } catch(Exception er) {
+            error_log(er);
         }
     }
     
@@ -280,7 +274,16 @@ public class TodolistController implements DefaultMenu {
         try {
             
         } catch(Exception er) {
-            
+            error_log(er);
+        }
+    }
+    
+    public void selectRow() {
+        try {
+            row = todolistView.getTodoTable().getSelectedRow();
+            todolistView.getDeleteButton().setEnabled(true);
+        }catch(Exception er){
+            error_log(er);
         }
     }
     
@@ -293,7 +296,12 @@ public class TodolistController implements DefaultMenu {
             todolistFormView.getStatusCombo().setSelectedItem(null);
             todolistFormView.getDetailTextArea().setText("");
         } catch(Exception er) {
-            JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);
+            error_log(er);
         }
+    }
+    
+    public void error_log(Exception er) {
+        er.printStackTrace();
+        JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);   
     }
 }
