@@ -1,8 +1,7 @@
 #include<iostream>
 #include<malloc.h> // malloc untuk bahasa c sedangkan new untuk bahasa c++
 #include<fstream>
-#include<string.h>
-#include<string>
+#include<stdlib.h>
 using namespace std;
 // pewoeder // inorder // postoreder
 // implementasi binary search tree
@@ -112,6 +111,7 @@ void hapus() {
 				else
 					resultNilai->kanan=NULL;
 			 }
+			 // using free if use malloc
 		delete tempNilai;
 		}
 // Bila PTB memiliki anak kiri dan anak kanan dgn banyak anak cabang
@@ -157,31 +157,58 @@ void hapus() {
 	  }
 }
 
-void hapusnode(dataMahasiswa iH)
+void hapusNode(nilaiMahasiswa mhsNilai, dataMahasiswa data)
 {
   if (emptyBST())
 	  cout << "PTB Kosong !\n\n";
   else
     {
-        resultNilai=dataNilai;
-        tempNilai=dataNilai;
-		// mencari tempat hapus node
-		while(tempNilai!=NULL && iH.noMhs!=tempNilai->mhs.noMhs)
-        {
-            resultNilai = tempNilai;
-            if (iH.noMhs < tempNilai->mhs.noMhs) {
-                tempNilai=resultNilai->kiri;
-            } else {
-                tempNilai=resultNilai->kanan;
+        if(mhsNilai == NULL) {
+            cout << "\nData tidak ditemukan!" << endl;
+        } else if(data.noMhs < mhsNilai->mhs.noMhs) {
+            hapusNode(mhsNilai->kiri, data);
+        } else if(data.noMhs > mhsNilai->mhs.noMhs) {
+            hapusNode(mhsNilai->kanan, data);
+        } else if(data.noMhs == mhsNilai->mhs.noMhs) {
+            resultNilai=dataNilai;
+            tempNilai=dataNilai;
+            // mencari tempat hapus node
+            while(tempNilai!=NULL && data.noMhs!=tempNilai->mhs.noMhs)
+            {
+                resultNilai = tempNilai;
+                if (data.noMhs < tempNilai->mhs.noMhs) {
+                    tempNilai=resultNilai->kiri;
+                } else {
+                    tempNilai=resultNilai->kanan;
+                }
             }
+            hapus();
         }
-	 }
-    hapus();
+    }
 }
 
 void updateNode(dataMahasiswa data) {}
 
-void searchNode(dataMahasiswa data) {}
+void showSearch(dataMahasiswa data) {
+    cout << "Mahasiswa dengan NIM " << data.noMhs << " ditemukan" << endl;
+    cout << "\nNama\t\t: " << data.nama << endl;
+    cout << "Nilai UTS\t: " << data.uts << endl;
+    cout << "Nilai UAS\t: " << data.uas << endl;
+    cout << "Nilai Akhir\t: " << data.akhir << endl;
+}
+
+void search(nilaiMahasiswa mhsNilai,dataMahasiswa data) {
+    if(mhsNilai == NULL) {
+        cout << "\nData tidak ditemukan!" << endl;
+    } else if(data.noMhs < mhsNilai->mhs.noMhs) {
+        search(mhsNilai->kiri, data);
+    } else if(data.noMhs > mhsNilai->mhs.noMhs) {
+        search(mhsNilai->kanan, data);
+    } else if(data.noMhs == mhsNilai->mhs.noMhs) {
+        data = mhsNilai->mhs;
+        showSearch(data);
+    }
+}
 
 int totalNode(nilaiMahasiswa nilaiMhs) {
  if(nilaiMhs != NULL) {
@@ -190,12 +217,28 @@ int totalNode(nilaiMahasiswa nilaiMhs) {
  return 0;
 }
 
+int heightTree(nilaiMahasiswa nilaiMhs) {
+    if(nilaiMhs == NULL) {
+        return 0;
+    } else {
+        int left = heightTree(nilaiMhs->kiri);
+        int right = heightTree(nilaiMhs->kanan);
+        if(left > right) {
+            return left+1;
+        } else {
+            return right+1;
+        }
+    }
+}
+
 void printNode() {
     char pilih;
     do {
         int total = totalNode(dataNilai);
+        int tinggiPohon = heightTree(dataNilai);
         if(total) {
             cout << "Total Node\t: " << total << endl;
+            cout << "Tinggi Pohon\t: " << tinggiPohon << endl;
             cout << "1. Pre-order\n2. In-order\n3. Post-order\nPilih\t: ";
             cin >> pilih;
             switch(pilih) {
@@ -247,19 +290,16 @@ void insertData(dataMahasiswa tempMahasiswa) {
 void searchData(dataMahasiswa mhs) {
     bool find = false;
     dataMahasiswa dataMhs;
-    ifstream readFile;
-    readFile.open("dataMahasiswa.txt", ios::binary);
-    while(readFile.read((char *) &dataMhs, sizeof(dataMhs))) {
-        if(mhs.noMhs == dataMhs.noMhs) {
-            find = true;
-            break;
-        }
-    }
-    if(find) {
-        cout << "Mahasiswa dengan NIM " << mhs.noMhs << " ditemukan" << endl;
-    } else {
-        cout << "Mahasiswa dengan NIM " << mhs.noMhs << " tidak ditemukan" << endl;
-    }
+    // pencarian data menggunakan file
+//    ifstream readFile;
+//    readFile.open("dataMahasiswa.txt", ios::binary);
+//    while(readFile.read((char *) &dataMhs, sizeof(dataMhs))) {
+//        if(mhs.noMhs == dataMhs.noMhs) {
+//            find = true;
+//            mhs = dataMhs;
+//            break;
+//        }
+//    }
 }
 
 void deleteData(dataMahasiswa mhs) {
@@ -281,16 +321,13 @@ void deleteData(dataMahasiswa mhs) {
     remove("dataMahasiswa.txt");
     rename("tmp.txt", "dataMahasiswa.txt");
     if(find) {
-        cout << "Mahasiswa dengan NIM " << mhs.noMhs << " telah dihapus" << endl;
+        cout << "\nMahasiswa dengan NIM " << mhs.noMhs << " telah dihapus" << endl;
     } else {
-        cout << "Mahasiwa dengan NIM " << mhs.noMhs << " tidak berhasil dihapus " << endl;
+        cout << "\nMahasiwa dengan NIM " << mhs.noMhs << " tidak berhasil dihapus " << endl;
     }
 }
 
-void updateData(dataMahasiswa mhs) {
-    cout << "Data yang ingin di edit\t: "; cin >> infoMhs.nim;
-
-}
+void updateData(dataMahasiswa mhs) {}
 
 int main() {
     char menu;
@@ -305,9 +342,8 @@ int main() {
         cout << "1. INPUT DATA" << endl;
         cout << "2. OUTPUT DATA" << endl;
         cout << "3. DELETE DATA" << endl;
-        cout << "4. EDIT DATA" << endl;
-        cout << "5. SEARCH DATA" << endl;
-
+        cout << "4. SEARCH DATA" << endl;
+        cout << "5. EXIT" << endl;
         cout << "Pilih\t: "; cin >> menu;
         switch(menu) {
             case '1':
@@ -328,26 +364,24 @@ int main() {
             case '3':
                 if(totalNode(dataNilai)) {
                     cout << "Data yang ingin di hapus\t: "; cin >> mhsNilai.noMhs;
-                    hapusnode(mhsNilai);
+                    hapusNode(dataNilai, mhsNilai);
                     deleteData(mhsNilai);
                 } else {
                     cout << "Data belum tersedia!" << endl;
                 }
                 break;
             case '4':
-                cout << "Update data mahasiswa\t: " << endl;
-                cout << "Cari NIM\t: "; cin >> mhsNilai.noMhs;
-                updateData();
-                break;
-            case '5':
                 cout << "Cari data mahasiswa\t: " << endl;
                 cout << "Cari NIM\t: "; cin >> mhsNilai.noMhs;
-                searchData(mhs);
+                search(dataNilai, mhsNilai);
+                break;
+            case '5':
+                exit(EXIT_SUCCESS);
                 break;
             default:
                 cout << "Salah pilih menu" << endl;
         }
-        cout << "Ingin kembali ke menu utama? (y/n)\t: "; cin >> menu;
+        cout << endl << "Ingin kembali ke menu utama? (y/n)\t: "; cin >> menu;
         if(menu == 'n'||menu=='N') break;
         system("cls");
     } while(true);
