@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import selfmanagement.controller.TodolistController;
 import selfmanagement.model.Todolist;
@@ -28,13 +29,16 @@ public class TodolistView extends DefaultView {
     JButton addButton;
     JButton editButton;
     JButton deleteButton;
-    JButton viewButton;
-    Object columnTable[] = {"Check", "Title", "End Date"};
+    JButton doneButton;
+    
+    Object columnTable[] = {"ID", "Check", "Title", "End Date"};
     
     public TodolistView() {
+        
         template(new String[]{"Todolists"});
         initComponents();
         initFrame();
+        
     }
     
     public void initComponents() {
@@ -45,19 +49,21 @@ public class TodolistView extends DefaultView {
         addButton = new JButton("Add Todolist");
         editButton = new JButton("Edit Todolist");
         deleteButton = new JButton("Delete Todolist");
-        viewButton = new JButton("View Todolist");
-       
+        doneButton = new JButton("Completed Todos");
+        
         TodoPanel.setBounds(30, 30, 530, 650);
         TodoPanel.setLayout(null);
         
+        mainPanel.add(doneButton);
+        doneButton.setBounds(40, 620, 150, 30);
+        
+        mainLabel.setText("Todolist Hari ini");
+        
         TodoPanel.add(addButton);
         addButton.setBounds(10, 30, 120, 30);
-        
-        TodoPanel.add(viewButton);
-        viewButton.setBounds(140, 30, 120, 30);
-        
+       
         TodoPanel.add(editButton);
-        editButton.setBounds(270, 30, 120, 30);
+        editButton.setBounds(210, 30, 120, 30);
         
         TodoPanel.add(deleteButton);
         deleteButton.setBounds(400, 30, 120, 30);
@@ -66,11 +72,13 @@ public class TodolistView extends DefaultView {
         TodoTable.setCellSelectionEnabled(true);
         TodoTable.getTableHeader().setReorderingAllowed(false);
         TodoTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        TodoTable.getColumnModel().getColumn(0).setPreferredWidth(67);
-        TodoTable.getColumnModel().getColumn(1).setPreferredWidth(300);
-        TodoTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+        TodoTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+        TodoTable.getColumnModel().getColumn(1).setPreferredWidth(67);
+        TodoTable.getColumnModel().getColumn(2).setPreferredWidth(265);
+        TodoTable.getColumnModel().getColumn(3).setPreferredWidth(150);
         TodoScroll.setBounds(10, 80, 520, 500);
 
+        
         mainPanel.add(TodoPanel);
     }
 
@@ -129,21 +137,19 @@ public class TodolistView extends DefaultView {
     public void setDeleteButton(JButton deleteButton) {
         this.deleteButton = deleteButton;
     }
-
-    public JButton getViewButton() {
-        return viewButton;
-    }
-
-    public void setViewButton(JButton viewButton) {
-        this.viewButton = viewButton;
-    }
-
+    
     public Object[] getColumnTable() {
         return columnTable;
     }
 
     public void setColumnTable(Object[] columnTable) {
         this.columnTable = columnTable;
+    }
+    
+    public String getIdTodo() {
+        int row = TodoTable.getSelectedRow();
+        int column = TodoTable.getSelectedColumn();
+        return TodoTable.getValueAt(row, 0).toString();
     }
 
     public static void main(String[] args) {

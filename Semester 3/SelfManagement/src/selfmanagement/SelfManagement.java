@@ -9,7 +9,7 @@ import selfmanagement.controller.LoginController;
 import selfmanagement.model.Account;
 import selfmanagement.view.HomeView;
 
-/**
+/**Mem
  *
  * @author izal
  */

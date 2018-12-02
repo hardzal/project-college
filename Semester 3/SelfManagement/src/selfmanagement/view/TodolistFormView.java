@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import selfmanagement.model.Todolist;
+import selfmanagement.model.dao.TodolistDAOImpl;
 
 /**
  *
@@ -46,8 +48,13 @@ public class TodolistFormView {
     JButton submitButton;
     JButton resetButton;
     
+    Todolist todo;
+    TodolistDAOImpl todoDAO;
+    
     public TodolistFormView() {
         initComponents();
+        todo = new Todolist();
+        todoDAO = new TodolistDAOImpl();
     }
     
     @SuppressWarnings("empty-statement")
@@ -100,7 +107,7 @@ public class TodolistFormView {
         titleField.setFont(new Font("Sans-serif", Font.PLAIN, 14));
         
         dateEndField = new JTextField(12);
-        dateEndField.setBounds(120, 100, 100, 30);
+        dateEndField.setBounds(120, 100, 225, 30);
         dateEndField.setFont(new Font("Sans-serif", Font.PLAIN, 14));
         
         categoryTodo = new Object[]{"Work", "Learn", "Travel"};
@@ -234,24 +241,24 @@ public class TodolistFormView {
         return titleField;
     }
 
-    public void setTitleField(JTextField titleField) {
-        this.titleField = titleField;
+    public void setTitleField(String titleField) {
+        this.titleField.setText(titleField);
     }
 
     public JTextField getDateEndField() {
         return dateEndField;
     }
 
-    public void setDateEndField(JTextField dateEndField) {
-        this.dateEndField = dateEndField;
+    public void setDateEndField(String dateEndField) {
+        this.dateEndField.setText(dateEndField);
     }
 
     public JComboBox getCategoryCombo() {
         return categoryCombo;
     }
 
-    public void setCategoryCombo(JComboBox categoryCombo) {
-        this.categoryCombo = categoryCombo;
+    public void setCategoryCombo(String categoryCombo) {
+        this.categoryCombo.setSelectedItem(categoryCombo);
     }
 
     public Object[] getCategoryTodo() {
@@ -266,8 +273,8 @@ public class TodolistFormView {
         return priorityCombo;
     }
 
-    public void setPriorityCombo(JComboBox priorityCombo) {
-        this.priorityCombo = priorityCombo;
+    public void setPriorityCombo(String priorityCombo) {
+        this.priorityCombo.setSelectedItem(priorityCombo);
     }
 
     public Object[] getPriorityTodo() {
@@ -282,8 +289,8 @@ public class TodolistFormView {
         return statusCombo;
     }
 
-    public void setStatusCombo(JComboBox statusCombo) {
-        this.statusCombo = statusCombo;
+    public void setStatusCombo(int statusCombo) {
+        this.statusCombo.setSelectedIndex(statusCombo);
     }
 
     public Object[] getStatusTodo() {
@@ -306,8 +313,8 @@ public class TodolistFormView {
         return detailTextArea;
     }
 
-    public void setDetailTextArea(JTextArea detailTextArea) {
-        this.detailTextArea = detailTextArea;
+    public void setDetailTextArea(String detailTextArea) {
+        this.detailTextArea.setText(detailTextArea);
     }
 
     public JButton getSubmitButton() {

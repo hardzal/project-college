@@ -5,11 +5,19 @@
  */
 package selfmanagement.view;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author izal
  */
 public class NotesView extends DefaultView {
+    JTextArea notesField;
+    JLabel titleField;
+    JButton editButton;
+    JButton deleteButton;
     
     public NotesView() {
         template(new String[]{"Notes"});
@@ -18,7 +26,7 @@ public class NotesView extends DefaultView {
     }
     
     public void initComponents() {
-        
+        mainLabel.setText("Notes");
     }
     
     public static void main(String[] args) {

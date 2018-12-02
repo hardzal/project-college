@@ -16,6 +16,6 @@ public interface TodolistDAO {
     public boolean insertTodolist(Todolist todo);
     public boolean updateTodolist(Todolist todo);
     public boolean deleteTodolist(int id);
-    public List<Todolist> getAllTodolist();
-    public List<Todolist> getTodolist();
+    public List<Todolist> getAllTodolist(int idUser);
+    public Todolist getTodolist(int id);
 }

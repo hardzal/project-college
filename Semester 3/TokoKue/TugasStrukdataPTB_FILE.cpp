@@ -17,45 +17,52 @@ struct mahasiswa {
 	nilaiMahasiswa kiri, kanan;
 };
 
-nilaiMahasiswa dataNilai, tempNilai, resultNilai;
+nilaiMahasiswa dataNilai, currentNilai, parentNilai;
 ofstream dataMhsBaru;
 ifstream dataMhsLama;
+// bool cari = false;
 
 void createBST() {
     dataNilai = NULL;
 }
 
-int emptyBST() {
-    return (dataNilai == NULL ? true : false);
+void insertData(dataMahasiswa tempMahasiswa) {
+    dataMhsBaru.open("dataMahasiswa.txt", ios::binary|ios::app);
+    if(dataMhsBaru.is_open()) {
+        dataMhsBaru.write((char *) &tempMahasiswa, sizeof(tempMahasiswa));
+        dataMhsBaru.close();
+    } else {
+        cout << "Gagal menyimpan kedalam file" << endl;
+    }
 }
 
-void insertNode(dataMahasiswa info) {
+void insertNode(nilaiMahasiswa nilaiMhs, dataMahasiswa info) {
     nilaiMahasiswa newNilai;
-//    newNilai = (mahasiswa *) malloc(sizeof(mahasiswa));
+    //newNilai = (mahasiswa *) malloc(sizeof(mahasiswa));
     newNilai = new mahasiswa;
     newNilai->mhs = info;
     newNilai->kiri = NULL;
     newNilai->kanan = NULL;
-    if(emptyBST()) {
+
+    if(dataNilai == NULL) {
         dataNilai = newNilai;
     } else {
-        resultNilai = dataNilai;
-        tempNilai = dataNilai;
-        while(tempNilai != NULL && info.noMhs != tempNilai->mhs.noMhs) {
-            resultNilai = tempNilai;
-            if(info.noMhs < tempNilai->mhs.noMhs) {
-                tempNilai =  resultNilai->kiri;
-            } else {
-                tempNilai = resultNilai->kanan;
-            }
+        parentNilai = nilaiMhs;
+        currentNilai = nilaiMhs;
+        while(currentNilai!=NULL && info.noMhs!=currentNilai->mhs.noMhs){
+            parentNilai=currentNilai;
+			 if (info.noMhs < currentNilai->mhs.noMhs)
+				currentNilai=parentNilai->kiri;
+			 else
+				currentNilai=parentNilai->kanan;
         }
-        if(info.noMhs == resultNilai->mhs.noMhs) {
+        if(info.noMhs == parentNilai->mhs.noMhs) {
             cout << "Node " << info.noMhs << " sudah ada " << endl;
         } else {
-            if(info.noMhs < resultNilai->mhs.noMhs) {
-                resultNilai->kiri = newNilai;
+            if(info.noMhs < parentNilai->mhs.noMhs) {
+                parentNilai->kiri = newNilai;
             } else {
-                resultNilai->kanan = newNilai;
+                parentNilai->kanan = newNilai;
             }
         }
     }
@@ -100,66 +107,66 @@ void postorder(nilaiMahasiswa nilai) {
 void hapus() {
     nilaiMahasiswa temp;
 // Bila PTB terdiri dari akar saja atau akar dengan 1 anak kiri/kanan
-  if (tempNilai->kiri==NULL && tempNilai->kanan==NULL)
+  if (currentNilai->kiri==NULL && currentNilai->kanan==NULL)
 	  {
-		 if (resultNilai==dataNilai && tempNilai==dataNilai)
+		 if (parentNilai==dataNilai && currentNilai==dataNilai)
 			 dataNilai=NULL;
 		 else
 			 {
-				if (tempNilai==resultNilai->kiri)
-					resultNilai->kiri=NULL;
+				if (currentNilai==parentNilai->kiri)
+					parentNilai->kiri=NULL;
 				else
-					resultNilai->kanan=NULL;
+					parentNilai->kanan=NULL;
 			 }
 			 // using free if use malloc
-		delete tempNilai;
+		delete currentNilai;
 		}
 // Bila PTB memiliki anak kiri dan anak kanan dgn banyak anak cabang
-  else if (tempNilai->kiri!=NULL && tempNilai->kanan!=NULL)
+  else if (currentNilai->kiri!=NULL && currentNilai->kanan!=NULL)
 	  {
-		 temp=tempNilai->kiri;
-		 resultNilai=tempNilai;
+		 temp=currentNilai->kiri;
+		 parentNilai=currentNilai;
 		 while (temp->kanan != NULL)
-			{ resultNilai=temp;
+			{ parentNilai=temp;
 			  temp=temp->kanan; }
-		 tempNilai->mhs=temp->mhs;
-		 if (resultNilai==tempNilai)
-			 resultNilai->kiri = temp->kiri;
+		 currentNilai->mhs=temp->mhs;
+		 if (parentNilai==currentNilai)
+			 parentNilai->kiri = temp->kiri;
 		 else
-			 resultNilai->kanan = temp->kiri;
+			 parentNilai->kanan = temp->kiri;
 		 delete temp;
 	  }
 // Bila PTB memiliki anak kiri saja dgn banyak anak cabang
-  else if (tempNilai->kiri!=NULL && tempNilai->kanan==NULL)
+  else if (currentNilai->kiri!=NULL && currentNilai->kanan==NULL)
 	  {
-		 if (resultNilai==tempNilai)
-			 dataNilai=tempNilai->kiri;
+		 if (parentNilai==currentNilai)
+			 dataNilai=currentNilai->kiri;
 		 else
-			{ if (tempNilai==resultNilai->kiri)
-				  resultNilai->kiri=tempNilai->kiri;
+			{ if (currentNilai==parentNilai->kiri)
+				  parentNilai->kiri=currentNilai->kiri;
 			  else
-				  resultNilai->kanan=tempNilai->kiri;
+				  parentNilai->kanan=currentNilai->kiri;
 			}
-		 delete tempNilai;
+		 delete currentNilai;
 	  }
 // Bila PTB memiliki anak kanan saja dgn banyak anak cabang
-  else if (tempNilai->kiri==NULL && tempNilai->kanan!=NULL)
+  else if (currentNilai->kiri==NULL && currentNilai->kanan!=NULL)
 	  {
-		 if (resultNilai==tempNilai)
-			 dataNilai=tempNilai->kanan;
+		 if (parentNilai==currentNilai)
+			 dataNilai=currentNilai->kanan;
 		 else
-			{ if (tempNilai==resultNilai->kanan)
-				  resultNilai->kanan=tempNilai->kanan;
+			{ if (currentNilai==parentNilai->kanan)
+				  parentNilai->kanan=currentNilai->kanan;
 			  else
-				  resultNilai->kiri=tempNilai->kanan;
+				  parentNilai->kiri=currentNilai->kanan;
 			}
-		 delete tempNilai;
+		 delete currentNilai;
 	  }
 }
 
 void hapusNode(nilaiMahasiswa mhsNilai, dataMahasiswa data)
 {
-  if (emptyBST())
+  if (dataNilai == NULL)
 	  cout << "PTB Kosong !\n\n";
   else
     {
@@ -170,16 +177,16 @@ void hapusNode(nilaiMahasiswa mhsNilai, dataMahasiswa data)
         } else if(data.noMhs > mhsNilai->mhs.noMhs) {
             hapusNode(mhsNilai->kanan, data);
         } else if(data.noMhs == mhsNilai->mhs.noMhs) {
-            resultNilai=dataNilai;
-            tempNilai=dataNilai;
+            parentNilai=dataNilai;
+            currentNilai=dataNilai;
             // mencari tempat hapus node
-            while(tempNilai!=NULL && data.noMhs!=tempNilai->mhs.noMhs)
+            while(currentNilai!=NULL && data.noMhs!=currentNilai->mhs.noMhs)
             {
-                resultNilai = tempNilai;
-                if (data.noMhs < tempNilai->mhs.noMhs) {
-                    tempNilai=resultNilai->kiri;
+                parentNilai = currentNilai;
+                if (data.noMhs < currentNilai->mhs.noMhs) {
+                    currentNilai=parentNilai->kiri;
                 } else {
-                    tempNilai=resultNilai->kanan;
+                    currentNilai=parentNilai->kanan;
                 }
             }
             hapus();
@@ -234,7 +241,8 @@ int heightTree(nilaiMahasiswa nilaiMhs) {
 void printNode() {
     char pilih;
     do {
-        int total = totalNode(dataNilai);
+        int
+         total = totalNode(dataNilai);
         int tinggiPohon = heightTree(dataNilai);
         if(total) {
             cout << "Total Node\t: " << total << endl;
@@ -266,40 +274,30 @@ void printNode() {
     return;
 }
 
+bool searchData(dataMahasiswa mhs) {
+    bool find = false;
+    dataMahasiswa dataMhs;
+    ifstream readFile;
+    readFile.open("dataMahasiswa.txt", ios::binary);
+    while(readFile.read((char *) &dataMhs, sizeof(dataMhs))) {
+        if(mhs.noMhs == dataMhs.noMhs) {
+            readFile.close();
+            return true;
+        }
+    }
+    readFile.close();
+    return false;
+}
+
 void readData() {
     dataMhsLama.open("dataMahasiswa.txt", ios::binary);
     dataMahasiswa mahasiswaLama;
     if(!dataMhsLama.fail()) {
         while(dataMhsLama.read((char *) &mahasiswaLama, sizeof(mahasiswaLama))) {
-            insertNode(mahasiswaLama);
+            insertNode(dataNilai, mahasiswaLama);
         }
         dataMhsLama.close();
     }
-}
-
-void insertData(dataMahasiswa tempMahasiswa) {
-    dataMhsBaru.open("dataMahasiswa.txt", ios::binary|ios::app);
-    if(dataMhsBaru.is_open()) {
-        dataMhsBaru.write((char *) &tempMahasiswa, sizeof(tempMahasiswa));
-        dataMhsBaru.close();
-    } else {
-        cout << "Gagal menyimpan kedalam file" << endl;
-    }
-}
-
-void searchData(dataMahasiswa mhs) {
-    bool find = false;
-    dataMahasiswa dataMhs;
-    // pencarian data menggunakan file
-//    ifstream readFile;
-//    readFile.open("dataMahasiswa.txt", ios::binary);
-//    while(readFile.read((char *) &dataMhs, sizeof(dataMhs))) {
-//        if(mhs.noMhs == dataMhs.noMhs) {
-//            find = true;
-//            mhs = dataMhs;
-//            break;
-//        }
-//    }
 }
 
 void deleteData(dataMahasiswa mhs) {
@@ -354,7 +352,7 @@ int main() {
                 cout << "Nilai UAS\t: "; cin >> mhsNilai.uas;
                 mhsNilai.akhir = (0.4 *  mhsNilai.uts) + (0.6 * mhsNilai.uas);
                 cout << "Nilai Akhir\t: " << mhsNilai.akhir << endl << endl;
-                insertNode(mhsNilai);
+                insertNode(dataNilai, mhsNilai);
                 insertData(mhsNilai);
                 cout << endl;
                 break;

@@ -8,10 +8,17 @@ package selfmanagement.controller;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import selfmanagement.model.Account;
+import selfmanagement.model.AccountManagement;
+import selfmanagement.model.Contactlist;
 import selfmanagement.view.DashboardView;
 import selfmanagement.model.Dashboard;
+import selfmanagement.model.Notes;
 import selfmanagement.model.Todolist;
+import selfmanagement.view.AccountManagementView;
+import selfmanagement.view.AccountView;
+import selfmanagement.view.ContactlistView;
 import selfmanagement.view.HomeView;
+import selfmanagement.view.NotesView;
 import selfmanagement.view.TodolistView;
 /**
  *
@@ -55,6 +62,7 @@ public class DashboardController implements DefaultMenu {
             TodolistController todo = new TodolistController(todolistView, todolist);
             todo.initTodo();
         } catch(Exception er) {
+            er.printStackTrace();
             JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -62,7 +70,11 @@ public class DashboardController implements DefaultMenu {
     @Override
     public void noteFrame() {
         try {
-            
+            dashboardView.getDashboardFrame().dispose();
+            NotesView notesView = new NotesView();
+            Notes notes = new Notes();
+            NotesController notesController = new NotesController(notesView, notes);
+            notesController.initNotes();
         } catch(Exception er) {
             
         }
@@ -71,7 +83,11 @@ public class DashboardController implements DefaultMenu {
     @Override
     public void contactFrame() {
         try {
-            
+            dashboardView.getDashboardFrame().dispose();
+            ContactlistView contactlistView = new ContactlistView();
+            Contactlist contactlist = new Contactlist();
+            ContactlistController contactlistController = new ContactlistController(contactlistView, contactlist);
+            contactlistController.initContactlist();
         } catch(Exception er) {
             
         }
@@ -80,7 +96,11 @@ public class DashboardController implements DefaultMenu {
     @Override
     public void accountManagementFrame() {
         try {
-            
+            dashboardView.getDashboardFrame().dispose();
+            AccountManagementView accountManagementView = new AccountManagementView();
+            AccountManagement accountManagement = new AccountManagement();
+            AccountManagementController accountManagementController = new AccountManagementController(accountManagementView, accountManagement);
+            accountManagementController.initAccountManagement();
         } catch(Exception er){
             
         }
@@ -89,7 +109,11 @@ public class DashboardController implements DefaultMenu {
     @Override
     public void accountFrame() {
         try {
-            
+            dashboardView.getDashboardFrame().dispose();
+            AccountView accountView = new AccountView();
+            Account account = new Account();
+            AccountController accountController = new AccountController(accountView, account);
+            accountController.initAccount();            
         } catch(Exception er) {
             
         }

@@ -31,10 +31,7 @@ abstract class DefaultView {
     JButton logoutButton;
     JButton contactButton;
     JLabel headerLabel;
-    JLabel mainLabel;
-    JLabel todoLabel;
-    JLabel noteLabel;
-    JLabel contactLabel;
+    JLabel mainLabel = new JLabel("SelfTodos App");
     JLabel dashboardLabel;
     
     public void template(String label[]) {
@@ -53,13 +50,9 @@ abstract class DefaultView {
         dashboardLabel = new JLabel("");
         
         mainPanel = new JPanel();
-        mainLabel = new JLabel("Welcome back");
+        
         
         menuPanel = new JPanel();
-        
-        todoLabel = new JLabel("Todo Hari ini : ");
-        noteLabel = new JLabel("Last Note : ");
-        contactLabel = new JLabel("Contact Terakhir : ");
         
         dashboardButton = new JButton("Dashboard");
         todoButton = new JButton("Todolist");
@@ -119,10 +112,6 @@ abstract class DefaultView {
         mainLabel.setBounds(40, 10, 200, 50);
         mainLabel.setFont(new Font("Sans-serif", Font.BOLD, 20));
         mainPanel.add(mainLabel);
-        
-        mainPanel.add(todoLabel);
-        mainPanel.add(noteLabel);
-        mainPanel.add(contactLabel);
     }
     
     public void initFrame() {
@@ -247,30 +236,6 @@ abstract class DefaultView {
 
     public void setMainLabel(JLabel mainLabel) {
         this.mainLabel = mainLabel;
-    }
-
-    public JLabel getTodoLabel() {
-        return todoLabel;
-    }
-
-    public void setTodoLabel(JLabel todoLabel) {
-        this.todoLabel = todoLabel;
-    }
-
-    public JLabel getNoteLabel() {
-        return noteLabel;
-    }
-
-    public void setNoteLabel(JLabel noteLabel) {
-        this.noteLabel = noteLabel;
-    }
-
-    public JLabel getContactLabel() {
-        return contactLabel;
-    }
-
-    public void setContactLabel(JLabel contactLabel) {
-        this.contactLabel = contactLabel;
     }
 
     public JLabel getDashboardLabel() {

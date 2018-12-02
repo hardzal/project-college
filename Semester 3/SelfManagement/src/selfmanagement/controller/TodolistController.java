@@ -9,18 +9,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;;
 import javax.swing.table.DefaultTableModel;
 import selfmanagement.model.Account;
+import selfmanagement.model.AccountManagement;
+import selfmanagement.model.Contactlist;
 import selfmanagement.view.TodolistView;
 import selfmanagement.model.Todolist;
 import selfmanagement.view.DashboardView;
 import selfmanagement.model.Dashboard;
 import selfmanagement.model.Notes;
 import selfmanagement.model.dao.TodolistDAOImpl;
+import selfmanagement.view.AccountManagementView;
+import selfmanagement.view.AccountView;
+import selfmanagement.view.ContactlistView;
 import selfmanagement.view.HomeView;
 import selfmanagement.view.NotesView;
 import selfmanagement.view.TodolistFormView;
@@ -44,7 +47,8 @@ public class TodolistController implements DefaultMenu {
         this.todolistView = todolistView;
         todolistDAOImpl = new TodolistDAOImpl();
         todolistFormView = new TodolistFormView();
-        list = todolistDAOImpl.getAllTodolist();
+        list = todolistDAOImpl.getAllTodolist(1);
+        System.out.println(todolist.getIdUser());
         todoFrame();
     }
     
@@ -58,7 +62,6 @@ public class TodolistController implements DefaultMenu {
         todolistView.getLogoutButton().addActionListener((ae) -> logout());
         todolistView.getAddButton().addActionListener((ae) -> addTodoFrame());
         todolistView.getEditButton().addActionListener((ae) -> editTodoFrame());
-        todolistView.getViewButton().addActionListener((ae) -> viewTodoFrame());
         
         todolistView.getDeleteButton().addActionListener(new ActionListener() {
             @Override
@@ -83,21 +86,23 @@ public class TodolistController implements DefaultMenu {
             if(!list.isEmpty() && list != null) {
                // TodolistView todoView = new TodolistView();
                 for(Todolist todo : list) {
-                    Object[] isi = new Object[3];
+                    Object[] isi = new Object[4];
+                    isi[0] = todo.getId();
                     if(!Boolean.parseBoolean(String.valueOf(todo.getStatus()))) {
-                        isi[0] = "Progress";
+                        isi[1] = "Progress";
                     } else {
-                        isi[0] = "Done";
+                        isi[1] = "Done";
                     }
-                    isi[1] = todo.getTitle();
-                    isi[2] = todo.getSchedule();
+                    isi[2] = todo.getTitle();
+                    isi[3] = todo.getSchedule();
 //                    todolistView.getTodoModel().addRow(isi);
                     todoModel.addRow(isi);
                 }
                 todolistView.getTodoTable().setModel(todoModel);
-                todolistView.getTodoTable().getColumnModel().getColumn(0).setPreferredWidth(67);
-                todolistView.getTodoTable().getColumnModel().getColumn(1).setPreferredWidth(300);
-                todolistView.getTodoTable().getColumnModel().getColumn(2).setPreferredWidth(150);
+                todolistView.getTodoTable().getColumnModel().getColumn(0).setPreferredWidth(35);
+                todolistView.getTodoTable().getColumnModel().getColumn(1).setPreferredWidth(67);
+                todolistView.getTodoTable().getColumnModel().getColumn(2).setPreferredWidth(265);
+                todolistView.getTodoTable().getColumnModel().getColumn(3).setPreferredWidth(150);
             } else {
                 JOptionPane.showMessageDialog(null,"Data belum tersedia!", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -121,7 +126,6 @@ public class TodolistController implements DefaultMenu {
     @Override
     public void todoFrame() {
         try {
-            todolistView.getDashboardFrame().dispose();
             reloadData(list);
         } catch(Exception er) {
             error_log(er);
@@ -144,7 +148,11 @@ public class TodolistController implements DefaultMenu {
     @Override
     public void accountManagementFrame() {
         try {
-            
+            todolistView.getDashboardFrame().dispose();
+            AccountManagementView accountManagementView = new AccountManagementView();
+            AccountManagement accountManagement = new AccountManagement();
+            AccountManagementController accountManagementController = new AccountManagementController(accountManagementView, accountManagement);
+            accountManagementController.initAccountManagement();
         } catch(Exception er) {
             error_log(er);
         }
@@ -153,7 +161,11 @@ public class TodolistController implements DefaultMenu {
     @Override
     public void contactFrame() {
         try {
-            
+            todolistView.getDashboardFrame().dispose();
+            ContactlistView contactlistView = new ContactlistView();
+            Contactlist contactlist = new Contactlist();
+            ContactlistController contactlistController = new ContactlistController(contactlistView, contactlist);
+            contactlistController.initContactlist();
         } catch(Exception er) {
             error_log(er);
         }
@@ -162,7 +174,11 @@ public class TodolistController implements DefaultMenu {
     @Override
     public void accountFrame() {
         try {
-            
+            todolistView.getDashboardFrame().dispose();
+            AccountView accountView = new AccountView();
+            Account account = new Account();
+            AccountController accountController = new AccountController(accountView, account);
+            accountController.initAccount();
         } catch(Exception er) {
             error_log(er);
         }
@@ -215,8 +231,7 @@ public class TodolistController implements DefaultMenu {
                        resetField();
                        JOptionPane.showMessageDialog(null, "Berhasil", "Berhasil menambahkan Todolist", JOptionPane.INFORMATION_MESSAGE);
                        TodolistDAOImpl todo = new TodolistDAOImpl();
-                       List<Todolist> data = new ArrayList<Todolist>();
-                       data = todo.getAllTodolist();
+                       List<Todolist> data = todo.getAllTodolist(todolist.getIdUser());
                        reloadData(data);
                    } else {
                         JOptionPane.showMessageDialog(null, "ERROR", "Gagal Menambahkan Todolist!", JOptionPane.ERROR_MESSAGE);
@@ -238,8 +253,37 @@ public class TodolistController implements DefaultMenu {
     
     public void editTodoFrame() {
         try {
-            todolistFormView.getTodoFrame().setVisible(true);
+            int id = Integer.parseInt(todolistView.getIdTodo());
+            Todolist getTodolist = todolistDAOImpl.getTodolist(id);
+            todolistFormView.setTitleField(getTodolist.getTitle());
+            todolistFormView.setDateEndField(getTodolist.getSchedule());
+            todolistFormView.setCategoryCombo(getTodolist.getCategoryName());
+            todolistFormView.setPriorityCombo(getTodolist.getPriorityName());
+            todolistFormView.setDetailTextArea(getTodolist.getDetail());
+            todolistFormView.setStatusCombo(getTodolist.getStatus());
             
+            todolistFormView.getTodoFrame().setVisible(true);
+            todolistFormView.getSubmitButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    Todolist todo = new Todolist();
+                    todo.setIdCategory(todolistFormView.getCategoryCombo().getSelectedIndex());
+                    todo.setSchedule(todolistFormView.getDateEndField().getText());
+                    todo.setTitle(todolistFormView.getTitleField().getText());
+                    todo.setDetail(todolistFormView.getDetailTextArea().getText());
+                    todo.setStatus(todolistFormView.getStatusCombo().getSelectedIndex());
+                    todo.setPriorityName((String) todolistFormView.getPriorityCombo().getSelectedItem());
+                    todo.setId(id);
+                    todo.setAttachement("URL FILE IMAGE");
+//                    todo.setAttachement(todolistFormView.get);
+                    todolistDAOImpl.updateTodolist(todo);
+                    JOptionPane.showMessageDialog(null, "Data berhasil diperbaharui!");
+                    TodolistDAOImpl todoData = new TodolistDAOImpl();
+                    List<Todolist> data = todoData.getAllTodolist(todolist.getIdUser());
+                    reloadData(data);
+                    todolistFormView.getTodoFrame().dispose();
+                }                
+            });
         } catch(Exception er) {
             error_log(er);
         }
@@ -250,6 +294,8 @@ public class TodolistController implements DefaultMenu {
 //            todolistView.setTodoModel((DefaultTableModel) todolistView.getTodoTable().getModel());
             int input = JOptionPane.showConfirmDialog(null, "Apa Anda Yakin?","",JOptionPane.YES_NO_OPTION);
             if(input == 0) {
+                int id = Integer.parseInt(todolistView.getIdTodo());
+                todolistDAOImpl.deleteTodolist(id);
                 todolistView.setTodoModel((DefaultTableModel) todolistView.getTodoTable().getModel());
                 todolistView.getTodoModel().removeRow(row);      
 //                todolistDAOImpl.deleteTodolist(todolistView.getTodoTable().get);
@@ -302,6 +348,6 @@ public class TodolistController implements DefaultMenu {
     
     public void error_log(Exception er) {
         er.printStackTrace();
-        JOptionPane.showMessageDialog(null, "ERROR", er.getMessage(), JOptionPane.ERROR_MESSAGE);   
+        JOptionPane.showMessageDialog(null, er.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);   
     }
 }
