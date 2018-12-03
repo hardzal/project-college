@@ -16,7 +16,6 @@ import javax.swing.JTextField;
  * @author izal
  */
 public class AccountView extends DefaultView {
-    
     JLabel usernameLabel;
     JLabel currentPasswordLabel;
     JLabel newPasswordLabel;

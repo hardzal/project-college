@@ -9,8 +9,7 @@ package selfmanagement.model;
  *
  * @author izal
  */
-public class Schedule {
-    private int id;
+public class Schedule extends Parent{
     private int idTodo;
     private String title;
     private String detail;
@@ -19,14 +18,6 @@ public class Schedule {
     
     public Schedule() {
         
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getIdTodo() {

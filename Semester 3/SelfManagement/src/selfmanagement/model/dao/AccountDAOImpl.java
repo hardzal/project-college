@@ -50,7 +50,7 @@ public class AccountDAOImpl implements AccountDAO {
 
             prepareStatement.setString(1, ac.getUsername());
             prepareStatement.setString(2, ac.getPassword());
-            prepareStatement.setString(3, ac.getNama());
+            prepareStatement.setString(3, ac.getName());
             prepareStatement.setString(4, ac.getEmail());
 
             if(prepareStatement.executeUpdate() > 0) {

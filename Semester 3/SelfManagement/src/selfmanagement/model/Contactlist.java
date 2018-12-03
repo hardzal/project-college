@@ -9,9 +9,7 @@ package selfmanagement.model;
  *
  * @author izal
  */
-public class Contactlist {
-    private int id;
-    private int idUser;
+public class Contactlist extends Parent{
     private String name;
     private String noHp;
     
@@ -19,22 +17,12 @@ public class Contactlist {
         
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
+    public Contactlist(int idUser, String name, String noHp) {
         this.idUser = idUser;
+        this.name = name;
+        this.noHp = noHp;
     }
-
+    
     public String getName() {
         return name;
     }

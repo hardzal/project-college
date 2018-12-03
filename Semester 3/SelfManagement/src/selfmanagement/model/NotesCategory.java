@@ -9,6 +9,4 @@ package selfmanagement.model;
  *
  * @author izal
  */
-public class NotesCategory {
-    
-}
+public class NotesCategory {}

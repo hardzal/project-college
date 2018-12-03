@@ -9,8 +9,7 @@ package selfmanagement.model;
  *
  * @author izal
  */
-public class TodolistCategory {
-    private int id;
+public class TodolistCategory extends Parent {
     private String name;
     private String detail;
     
@@ -22,14 +21,6 @@ public class TodolistCategory {
         this.id = id;
         this.name = name;
         this.detail = detail;
-    }
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

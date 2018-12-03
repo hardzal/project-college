@@ -9,14 +9,5 @@ package selfmanagement.model;
  *
  * @author izal
  */
-public class Dashboard {
-    private int idUser;
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
+public class Dashboard extends Parent{
 }

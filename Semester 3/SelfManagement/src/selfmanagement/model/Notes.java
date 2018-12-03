@@ -9,11 +9,6 @@ package selfmanagement.model;
  *
  * @author izal
  */
-public class Notes {
-    
-    public Notes() {
-        
-    }
-    
-    
+public class Notes extends Parent {
+   
 }
