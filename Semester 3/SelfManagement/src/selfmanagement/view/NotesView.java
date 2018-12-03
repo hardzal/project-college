@@ -27,6 +27,7 @@ public class NotesView extends DefaultView {
     
     public void initComponents() {
         mainLabel.setText("Notes");
+        
     }
     
     public static void main(String[] args) {

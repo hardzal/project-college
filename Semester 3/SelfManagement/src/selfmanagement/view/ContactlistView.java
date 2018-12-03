@@ -20,4 +20,8 @@ public class ContactlistView extends DefaultView {
     public void initComponents() {
         
     }
+    
+    public static void main(String[] args) {
+        new ContactlistView();
+    }
 }

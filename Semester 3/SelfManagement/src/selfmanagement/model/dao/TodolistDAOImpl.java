@@ -158,7 +158,7 @@ public class TodolistDAOImpl implements TodolistDAO {
                 todo = new Todolist();
             }
             resultSet.close();
-            statement.close();
+            prepareStatement.close();
             return todo;
         } catch(SQLException er) {
             Logger.getLogger(Todolist.class.getName()).log(Level.SEVERE, null, er);

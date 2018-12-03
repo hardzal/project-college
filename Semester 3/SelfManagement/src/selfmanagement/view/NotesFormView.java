@@ -9,7 +9,7 @@ package selfmanagement.view;
  *
  * @author user
  */
-public class NotesFormView {
+public class NotesFormView { 
     
     public NotesFormView() {
         

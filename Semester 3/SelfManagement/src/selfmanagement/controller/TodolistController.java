@@ -207,6 +207,7 @@ public class TodolistController implements DefaultMenu {
                @Override
                public void actionPerformed(ActionEvent ae) {
                    int id = todolist.getIdUser();
+                    System.out.println(id);
                    String title = todolistFormView.getTitleField().getText().trim();
                    String deadline = todolistFormView.getDateEndField().getText().trim();
                    String category = (String) todolistFormView.getCategoryCombo().getSelectedItem();
@@ -307,15 +308,6 @@ public class TodolistController implements DefaultMenu {
         }
     }
    
-    public void viewTodoFrame() {
-        try {
-            todolistFormView.getTodoFrame().setVisible(true);
-            
-        } catch(Exception er) {
-            error_log(er);
-        }
-    }
-    
     public void categoryTodo() {
         try {
             

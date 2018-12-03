@@ -47,13 +47,10 @@ abstract class DefaultView {
         headerLabel = new JLabel("SelfTodos App");
         
         bodyPanel = new JPanel();
-        dashboardLabel = new JLabel("");
-        
-        mainPanel = new JPanel();
-        
-        
+        mainPanel = new JPanel();    
         menuPanel = new JPanel();
         
+        dashboardLabel = new JLabel("<html><head></head><body>Java Swing App v1.0 ©2018<br>OOP Project</body></html>");
         dashboardButton = new JButton("Dashboard");
         todoButton = new JButton("Todolist");
         noteButton = new JButton("Notes");
@@ -77,33 +74,36 @@ abstract class DefaultView {
         menuPanel.setBounds(0, 10, 200, 690);
         menuPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        dashboardButton.setBounds(10, 10, 180, 50);
+        dashboardButton.setBounds(10, 40, 180, 50);
         dashboardButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(dashboardButton);
         
-        todoButton.setBounds(10, 90, 180, 50);
+        todoButton.setBounds(10, 120, 180, 50);
         todoButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(todoButton);
         
-        noteButton.setBounds(10, 170, 180, 50);
+        noteButton.setBounds(10, 200, 180, 50);
         noteButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(noteButton);
         
-        accountmanagementButton.setBounds(10, 250, 180, 50);
+        accountmanagementButton.setBounds(10, 280, 180, 50);
         accountmanagementButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(accountmanagementButton);
         
-        contactButton.setBounds(10, 330, 180, 50);
+        contactButton.setBounds(10, 360, 180, 50);
         contactButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(contactButton);
         
-        accountButton.setBounds(10, 410, 180, 50);
+        accountButton.setBounds(10, 440, 180, 50);
         accountButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(accountButton);
         
-        logoutButton.setBounds(10, 490, 180, 50);
+        logoutButton.setBounds(10, 520, 180, 50);
         logoutButton.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         menuPanel.add(logoutButton);
+        
+        dashboardLabel.setBounds(10, 630, 200, 50);
+        menuPanel.add(dashboardLabel);
         
         mainPanel.setLayout(null);
         mainPanel.setBounds(180, 10, 600, 690);
@@ -126,6 +126,7 @@ abstract class DefaultView {
        
         dashboardFrame.setVisible(true);
     }
+    
     public JFrame getDashboardFrame() {
         return dashboardFrame;
     }
@@ -245,5 +246,4 @@ abstract class DefaultView {
     public void setDashboardLabel(JLabel dashboardLabel) {
         this.dashboardLabel = dashboardLabel;
     }
-   
 }

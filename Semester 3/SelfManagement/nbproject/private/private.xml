@@ -3,7 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/model/dao/TodolistDAOImpl.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/TodolistSubtaskView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/controller/AccountController.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/ContactlistFormView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/AccountManagementView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/AccountView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/DefaultView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/ContactlistView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/NotesView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/TodolistView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/ForgotPasswordView.java</file>
+            <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/view/AccountManagementFormView.java</file>
             <file>file:/D:/Code/project-college/Semester%203/SelfManagement/src/selfmanagement/SelfManagement.java</file>
         </group>
     </open-files>

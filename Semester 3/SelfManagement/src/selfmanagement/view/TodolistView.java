@@ -7,10 +7,12 @@ package selfmanagement.view;
 
 import java.awt.ScrollPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import selfmanagement.controller.TodolistController;
@@ -25,20 +27,21 @@ public class TodolistView extends DefaultView {
     JPanel TodoPanel;
     JTable TodoTable;
     DefaultTableModel TodoModel;
+    JTextField searchField;
+    JComboBox categoryCombo;
     JScrollPane TodoScroll;
     JButton addButton;
     JButton editButton;
     JButton deleteButton;
     JButton doneButton;
+    JButton searchButton;
     
     Object columnTable[] = {"ID", "Check", "Title", "End Date"};
     
     public TodolistView() {
-        
         template(new String[]{"Todolists"});
         initComponents();
         initFrame();
-        
     }
     
     public void initComponents() {
@@ -46,16 +49,28 @@ public class TodolistView extends DefaultView {
         TodoModel = new DefaultTableModel(columnTable, 0);
         TodoTable = new JTable(TodoModel);
         TodoScroll = new JScrollPane(TodoTable);
+        searchField = new JTextField(32);
+        categoryCombo = new JComboBox(new Object[]{"Private", "Learning", "Working"});
         addButton = new JButton("Add Todolist");
         editButton = new JButton("Edit Todolist");
         deleteButton = new JButton("Delete Todolist");
         doneButton = new JButton("Completed Todos");
+        searchButton = new JButton("Search!");
         
         TodoPanel.setBounds(30, 30, 530, 650);
         TodoPanel.setLayout(null);
         
         mainPanel.add(doneButton);
-        doneButton.setBounds(40, 620, 150, 30);
+        doneButton.setBounds(40, 620, 140, 30);
+        
+        mainPanel.add(searchField);
+        searchField.setBounds(200, 620, 130, 30);
+        
+        mainPanel.add(categoryCombo);
+        categoryCombo.setBounds(340, 620, 120, 30);
+        
+        mainPanel.add(searchButton);
+        searchButton.setBounds(470, 620, 100, 30);
         
         mainLabel.setText("Todolist Hari ini");
         
@@ -77,7 +92,6 @@ public class TodolistView extends DefaultView {
         TodoTable.getColumnModel().getColumn(2).setPreferredWidth(265);
         TodoTable.getColumnModel().getColumn(3).setPreferredWidth(150);
         TodoScroll.setBounds(10, 80, 520, 500);
-
         
         mainPanel.add(TodoPanel);
     }
@@ -151,7 +165,7 @@ public class TodolistView extends DefaultView {
         int column = TodoTable.getSelectedColumn();
         return TodoTable.getValueAt(row, 0).toString();
     }
-
+    
     public static void main(String[] args) {
         new TodolistView();
     }

@@ -18,4 +18,8 @@ public class TodolistSubtaskView {
     public void initComponents() {
         
     }
+    
+    public static void main(String[] args) {
+        new TodolistSubtaskView();
+    }
 }
