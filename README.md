@@ -2,9 +2,16 @@
 Just simple project in my college.
 
  ## Semester 1
-    Based on Mata Kuliah Algoritma dan Pemrograman Dasar I
+   Algoritma dan Pemrograman Dasar I
  ## Semester 2
-    Based on Mata Kuliah Algoritma dan Pemrograman Dasar II
+   Algoritma dan Pemrograman Dasar II
  ## Semester 3
-    Coming Soon:: Struktur Data
-    Coming Soon:: Pemrograman Berbasis Objek
+   Struktur Data
+   Pemrograman Berbasis Objek
+## Semester 4 
+   Basis Data
+   Sistem Digital
+   Analisis Berorientasi Berbasis Objek
+   Grafika Komputer
+   Teknologi Pemrograman Mobile
+
