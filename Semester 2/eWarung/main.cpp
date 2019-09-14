@@ -273,7 +273,7 @@ void login() {
 	cout << endl;
 	cout << setfill(' ') << setw(17) << "PASSWORD\t: "; //getline(cin, password);
 	while(pass != '\r'){
-		pass = getch();
+		pass = _getch();
 		if(pass == '\b'){
 			if(password.size() != 0){
 				cout << "\b \b";
@@ -335,7 +335,7 @@ void registrasi() {
 
 	cout << setfill(' ') << setw(17) << "PASSWORD\t\t: "; //getline(cin, password);
 	while(pass != '\r'){
-		pass = getch();
+		pass = _getch();
 		if(pass == '\b'){
 			if(password.size() != 0){
 				cout << "\b \b";
